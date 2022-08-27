@@ -1,0 +1,52 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: obtener_tarjeta_credito_story
+  steps:
+  - intent: obtener_tarjeta_credito
+  - action: utter_obtener_tarjeta_credito
+
+- story: aumentar_limite_extraccion_story
+  steps:
+  - intent: aumentar_limite_extraccion
+  - action: utter_aumentar_limite_extraccion
+
+- story: usuario_bloqueado_story
+  steps:
+  - intent: usuario_bloqueado
+  - action: utter_usuario_bloqueado
+
+- story: consultar_productos_story
+  steps:
+  - intent: consultar_productos
+  - action: utter_consultar_productos
+  - intent: consultar_precios
+  - action: action_precios

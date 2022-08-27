@@ -1,0 +1,57 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - obtener_tarjeta_credito
+  - aumentar_limite_extraccion
+  - usuario_bloqueado
+  - consultar_productos
+  - consultar_precios
+
+entity:
+  - costo_producto
+
+actions:
+  - action_precios
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_obtener_tarjeta_credito:
+  - text: "Para obtener una tarjeta de credito necesita X puntos de historial crediticio"
+
+  utter_aumentar_limite_extraccion:
+  - text: "Para aumentar el limite de extraccion de su tarjeta de debito para operar en cajeros automaticos, dirijase al siguiente link: www.elbanco.com/modificacion-de-limites"
+
+  utter_usuario_bloqueado:
+  - text: "Para desbloquear el usuario, ingrese a www.elbanco.com/desbloquear-usuario y siga las instrucciones que se indican"
+
+  utter_consultar_productos:
+  - text: "Dentro de nuestros productos se encuentran las cajas de ahorro, las cuentas corrientes, las tarjetas de credito, el resguardo bajo caja fuerte, etc."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
