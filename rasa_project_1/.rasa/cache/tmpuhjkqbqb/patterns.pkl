@@ -1,0 +1,10 @@
+[
+  {
+    "name": "costo_producto",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "costo_producto",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+"
+  }
+]
