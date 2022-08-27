@@ -50,3 +50,7 @@ stories:
   - action: utter_consultar_productos
   - intent: consultar_precios
   - action: action_precios
+  - intent: productos_empresas
+  - action: action_productos_empresa
+  - intent: productos_empresas_disponibles
+  - action: action_productos_empresa_disponibles

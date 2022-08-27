@@ -13,12 +13,23 @@ intents:
   - usuario_bloqueado
   - consultar_productos
   - consultar_precios
+  - productos_empresas
+  - productos_empresas_disponibles
 
 entity:
   - costo_producto
 
 actions:
   - action_precios
+  - action_productos_empresa
+  - action_productos_empresa_disponibles
+
+slots:
+  empresa:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: empresa
 
 responses:
   utter_greet:
@@ -50,7 +61,7 @@ responses:
   - text: "Para desbloquear el usuario, ingrese a www.elbanco.com/desbloquear-usuario y siga las instrucciones que se indican"
 
   utter_consultar_productos:
-  - text: "Dentro de nuestros productos se encuentran las cajas de ahorro, las cuentas corrientes, las tarjetas de credito, el resguardo bajo caja fuerte, etc."
+  - text: "Dentro de nuestros productos se encuentran las cajas de ahorro, las cuentas corrientes, las tarjetas de credito, el resguardo bajo caja fuerte, los seguros multirriesgos, etc."
 
 session_config:
   session_expiration_time: 60

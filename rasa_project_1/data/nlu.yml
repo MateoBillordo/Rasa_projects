@@ -119,9 +119,20 @@ nlu:
     - cuanto cuesta abrir una [caja de ahorro](producto)?
     - cuanto cuesta guardar en [caja fuerte](producto)?
     - cuanto cuesta abrir una [cuenta corriente](producto)?
+    - cuanto cuesta contratar un [seguro multirriesgo](producto)?
     
 
 - regex: costo_producto
   examples: |
     - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
     - [a-zA-Z]+\s[a-zA-Z]+
+
+- intent: productos_empresas
+  examples: |
+    - solo me interesan los productos para empresas
+    - estoy buscando productos para empresas
+
+- intent: productos_empresas_disponibles
+  examples: |
+    - que productos hay disponibles?
+    - que productos me pueden ofrecer?
