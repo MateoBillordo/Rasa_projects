@@ -116,9 +116,10 @@ nlu:
 - intent: consultar_precios
   examples: |
     - cuanto cuesta obtener una [tarjeta de credito](producto)?
-    - cuanto cuesta abrir una [caja de ahorro] (producto)?
-    - cuanto cuesta abrir una [cuenta corriente] (producto)?
-    - cuanto cuesta guardar en [caja fuerte] (producto)?
+    - cuanto cuesta abrir una [caja de ahorro](producto)?
+    - cuanto cuesta guardar en [caja fuerte](producto)?
+- cuanto cuesta abrir una [cuenta corriente](producto)?
+    
 
 - regex: costo_producto
   examples: |
