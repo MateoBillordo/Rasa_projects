@@ -1,0 +1,10 @@
+[
+  {
+    "name": "producto",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "producto",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+"
+  }
+]

@@ -122,7 +122,7 @@ nlu:
     - cuanto cuesta contratar un [seguro multirriesgo](producto)?
     
 
-- regex: costo_producto
+- regex: producto
   examples: |
     - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
     - [a-zA-Z]+\s[a-zA-Z]+
