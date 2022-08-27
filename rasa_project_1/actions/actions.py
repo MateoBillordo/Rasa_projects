@@ -5,8 +5,6 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 
-# This is a simple example for a custom action which utters "Hello World!"
-
 from email import message
 from turtle import st
 from typing import Any, Text, Dict, List
