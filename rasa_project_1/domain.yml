@@ -16,7 +16,7 @@ intents:
   - productos_empresas
   - productos_empresas_disponibles
 
-entity:
+entities:
   - producto
 
 actions:
