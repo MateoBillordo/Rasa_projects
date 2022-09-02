@@ -8,28 +8,7 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
-  - obtener_tarjeta_credito
-  - aumentar_limite_extraccion
-  - usuario_bloqueado
-  - consultar_productos
-  - consultar_precios
-  - productos_empresas
-  - productos_empresas_disponibles
 
-entities:
-  - producto
-
-actions:
-  - action_precios
-  - action_productos_empresa
-  - action_productos_empresa_disponibles
-
-slots:
-  empresa:
-    type: text
-    mappings:
-    - type: from_entity
-      entity: producto
 
 responses:
   utter_greet:
@@ -51,17 +30,6 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-  utter_obtener_tarjeta_credito:
-  - text: "Para obtener una tarjeta de credito necesita X puntos de historial crediticio"
-
-  utter_aumentar_limite_extraccion:
-  - text: "Para aumentar el limite de extraccion de su tarjeta de debito para operar en cajeros automaticos, dirijase al siguiente link: www.elbanco.com/modificacion-de-limites"
-
-  utter_usuario_bloqueado:
-  - text: "Para desbloquear el usuario, ingrese a www.elbanco.com/desbloquear-usuario y siga las instrucciones que se indican"
-
-  utter_consultar_productos:
-  - text: "Dentro de nuestros productos se encuentran las cajas de ahorro, las cuentas corrientes, las tarjetas de credito, el resguardo bajo caja fuerte, los seguros multirriesgos, etc."
 
 session_config:
   session_expiration_time: 60
