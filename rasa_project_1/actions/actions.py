@@ -54,6 +54,5 @@ class ActionCrearCuenta(Action):
             #intent = tracker.latest_message['intent'].get('name')
             tipo_cuenta = tracker.latest_message['entities'][0]['value']
             message = "Para abrir una " + str(tipo_cuenta) + " entra a este link y segui los pasos que alli se indican: www.elbanco/creacion-de-" + str(tipo_cuenta)
-            #if str(intent) == "crear_cuenta":
+            dispatcher.utter_message(text=str(message))
             return [SlotSet("tipo_cuenta",str(tipo_cuenta))]
-            #return []
