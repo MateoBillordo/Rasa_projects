@@ -8,7 +8,17 @@ intents:
   - mood_great
   - mood_unhappy
   - bot_challenge
+  - consultar_creacion_cuenta_bancaria
+  - consultar_caracteristicas_tipo_cuenta
+  - crear_cuenta
 
+entities:
+  - cuenta
+
+actions:
+  - action_listar_cuentas
+  - action_responder_caracteristicas
+  - action_crear_cuenta
 
 responses:
   utter_greet:

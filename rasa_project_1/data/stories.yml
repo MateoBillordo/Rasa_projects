@@ -29,3 +29,16 @@ stories:
   - intent: deny
   - action: utter_goodbye
 
+- story: creacion_de_cuenta
+  steps:
+  - intent: consultar_creacion_cuenta_bancaria
+  - action: action_listar_cuentas
+  - checkpoint: pregunta_caracteristicas
+  - intent: crear_cuenta
+  - action: action_crear_cuenta
+
+- story: caracteristicas_tipo_cuenta
+  steps:
+  - checkpoint: pregunta_caracteristicas
+  - intent: consultar_caracteristicas_tipo_cuenta
+  - action: action_responder_caracteristicas

@@ -89,3 +89,29 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: consultar_creacion_cuenta_bancaria
+  examples: |
+    - quiero crear una cuenta
+    - quiero abrir una cuenta
+    - como creo una cuenta?
+    - como abro una cuenta?
+
+- intent: consultar_caracteristicas_tipo_cuenta
+  examples: |
+    - que caracteristicas tiene la [caja de ahorro](cuenta)?
+    - que caracteristicas tiene la [cuenta corriente](cuenta)?
+    - que caracteristicas tiene la [cuenta universal gratuita](cuenta)?
+    - que caracteristicas tiene la [cuenta sueldo](cuenta)?
+
+- intent: crear_cuenta
+  examples: |
+    - quiero abrir una [cuenta universal gratuita](cuenta)
+    - quiero abrir una [caja de ahorro](cuenta)
+    - quiero abrir una [cuenta corriente](cuenta)
+    - quiero abrir una [cuenta sueldo](cuenta)
+
+- regex: cuenta
+  examples: |
+    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+
