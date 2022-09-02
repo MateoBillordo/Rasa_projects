@@ -31,7 +31,7 @@ class ActionResponderCaracteristicas(Action):
     def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
             tipo_cuenta = tracker.latest_message['entities'][0]['value']
-            message = "La {tipo_cuenta} "
+            message = "La " + str(tipo_cuenta)
             if str(tipo_cuenta) == "cuenta universal gratuita":
                 message += "permite abrir una cuenta bancaria a todas aquellas personas que no posean otro tipo de cuenta en el sistema financiero. Los beneficios que ofrece esta cuenta son la gratuidad en: apertura de cuenta, mantenimiento de la misma, otorgamiento de tarjeta de debito y en extracciones mediante cajero automatico (hasta 8 por mes). Para solicitarla solo es necesario el DNI"
             elif str(tipo_cuenta) == "caja de ahorro":
@@ -51,6 +51,9 @@ class ActionCrearCuenta(Action):
          return "action_crear_cuenta"
     def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            #intent = tracker.latest_message['intent'].get('name')
             tipo_cuenta = tracker.latest_message['entities'][0]['value']
-            message = "Para abrir una {tipo_cuenta} entra a este link y segui los pasos que alli se indican: www.elbanco/creacion-de-{tipo_cuenta}"
-            return []
+            message = "Para abrir una " + str(tipo_cuenta) + " entra a este link y segui los pasos que alli se indican: www.elbanco/creacion-de-" + str(tipo_cuenta)
+            #if str(intent) == "crear_cuenta":
+            return [SlotSet("tipo_cuenta",str(tipo_cuenta))]
+            #return []

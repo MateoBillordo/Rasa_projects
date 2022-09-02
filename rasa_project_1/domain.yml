@@ -15,6 +15,13 @@ intents:
 entities:
   - cuenta
 
+slots:
+  tipo_cuenta:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: cuenta
+
 actions:
   - action_listar_cuentas
   - action_responder_caracteristicas
