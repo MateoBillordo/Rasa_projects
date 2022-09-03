@@ -11,3 +11,31 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: Activar formulario tarjetas
+  steps:
+  - intent: solicitar_tarjeta_credito
+  - action: tarjeta_credito_form
+  - active_loop: tarjeta_credito_form
+
+- rule: Desactivar formulario tarjetas
+  condition:
+  - active_loop: tarjeta_credito_form
+  steps:
+  - action: tarjeta_credito_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_formulario_completado
+
+- rule: Formulario tarjetas input inesperado
+  steps:
+  - intent: solicitar_tarjeta_credito
+  - action: tarjeta_credito_form
+  - active_loop: tarjeta_credito_form
+  - slot_was_set:
+    - requested_slot: tipo_tarjeta_credito
+  - slot_was_set:
+    - tipo_tarjeta_credito: null
+  - active_loop: null
+  - action: utter_tipo_tarjeta_no_valido

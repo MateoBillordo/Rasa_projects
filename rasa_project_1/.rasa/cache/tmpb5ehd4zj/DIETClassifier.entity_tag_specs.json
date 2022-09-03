@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-cuenta",
+      "2": "I-cuenta",
+      "3": "L-cuenta",
+      "4": "U-cuenta",
+      "5": "B-tarjeta_credito",
+      "6": "I-tarjeta_credito",
+      "7": "L-tarjeta_credito",
+      "8": "U-tarjeta_credito",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-cuenta": 1,
+      "I-cuenta": 2,
+      "L-cuenta": 3,
+      "U-cuenta": 4,
+      "B-tarjeta_credito": 5,
+      "I-tarjeta_credito": 6,
+      "L-tarjeta_credito": 7,
+      "U-tarjeta_credito": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]

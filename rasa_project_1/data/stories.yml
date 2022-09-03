@@ -33,9 +33,8 @@ stories:
   steps:
   - intent: consultar_creacion_cuenta_bancaria
   - action: action_listar_cuentas
-  
 
-- story: caracteristicas_tipo_cuenta
+- story: consulta_caracteristicas_tipo_cuenta
   steps:
   - intent: consultar_caracteristicas_tipo_cuenta
   - action: action_responder_caracteristicas
@@ -44,3 +43,35 @@ stories:
   steps:
   - intent: crear_cuenta
   - action: action_crear_cuenta
+
+- story: consulta_gestion_tarjeta
+  steps:
+  - intent: consultar_gestion_tarjeta
+  - action: action_listar_tarjetas_disponibles
+
+- story: consulta_caracteristicas_tipo_tarjeta
+  steps:
+  - intent: consultar_caracteristicas_tarjetas
+  - action: action_responder_caracteristicas_tarjetas
+
+- story: gestion_tarjeta_credito_exitosa
+  steps:
+  - intent: solicitar_tarjeta_credito
+  - action: tarjeta_credito_form
+  - active_loop: tarjeta_credito_form
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_formulario_completado
+
+- story: gestion_tarjeta_credito_incorrecta
+  steps:
+  - intent: solicitar_tarjeta_credito
+  - action: tarjeta_credito_form
+  - active_loop: tarjeta_credito_form
+  - slot_was_set:
+    - requested_slot: tipo_tarjeta_credito
+  - slot_was_set:
+    - tipo_tarjeta_credito: null
+  - active_loop: null
+  - action: utter_tipo_tarjeta_no_valido

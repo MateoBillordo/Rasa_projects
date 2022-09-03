@@ -6,12 +6,15 @@
 
 
 from email import message
+from multiprocessing.sharedctypes import Value
+import re
 from turtle import st
 from typing import Any, Text, Dict, List
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
+from rasa_sdk.forms import FormValidationAction
 
 class ActionListarCuentas(Action):
 
@@ -19,6 +22,7 @@ class ActionListarCuentas(Action):
         return "action_listar_cuentas"
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
             message = "Los tipos de cuentas disponibles son: Cuenta corriente, caja de ahorro, cuenta universal gratuita y cuenta sueldo. Todas poseen caracteristicas diferentes"
             dispatcher.utter_message(text=str(message))
             return []
@@ -29,6 +33,7 @@ class ActionResponderCaracteristicas(Action):
          return "action_responder_caracteristicas"
     def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
             tipo_cuenta = tracker.latest_message['entities'][0]['value']
             message = "La " + str(tipo_cuenta)
             if str(tipo_cuenta) == "cuenta universal gratuita":
@@ -44,14 +49,69 @@ class ActionResponderCaracteristicas(Action):
             dispatcher.utter_message(text=str(message))
             return []
 
+class ActionListarTarjetasDisponibles(Action):
+    
+    def name(self) -> Text:
+         return "action_listar_tarjetas_disponibles"
+    def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
+            message = "Las tarjetas disponibles son: Visa Classic, Gold y Platinum, y Mastercard Standar, Gold y Platinum"
+            dispatcher.utter_message(text=str(message))
+            return []
+
 class ActionCrearCuenta(Action):
 
     def name(self) -> Text:
          return "action_crear_cuenta"
     def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-            #intent = tracker.latest_message['intent'].get('name')
+
             tipo_cuenta = tracker.latest_message['entities'][0]['value']
-            message = "Para abrir una " + str(tipo_cuenta) + " entra a este link y segui los pasos que alli se indican: www.elbanco/creacion-de-" + str(tipo_cuenta)
+            message = "Felicitaciones! Has creado una " + str(tipo_cuenta)
             dispatcher.utter_message(text=str(message))
             return [SlotSet("tipo_cuenta",str(tipo_cuenta))]
+
+class ActionCaracteristicasTarjetas(Action):
+
+    def name(self) -> Text:
+         return "action_responder_caracteristicas_tarjetas"
+    def run(self, dispatcher: "CollectingDispatcher", tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+            
+            tipo_tarjeta = tracker.latest_message['entities'][0]['value']
+            message = "La tarjeta " + str(tipo_tarjeta)
+            if str(tipo_tarjeta) == "visa classic":
+                message += " ofrece desembolso de efectivo de emergencia, servicio de reemplazo de tarjetas y proteccion de precios"
+            elif str(tipo_tarjeta) == "visa gold":
+                message += " ofrece desembolso de efectivo de emergencia, servicio de reemplazo de tarjetas, proteccion de precios, garantia extendida y proteccion de compra"
+            elif str(tipo_tarjeta) == "mastercard standar":
+                message += " ofrece proteccion de compras"
+            elif str(tipo_tarjeta) == "mastercard gold":
+                message += " ofrece proteccion de compras, garantia extendida, proteccion de precios, asistencia medica en viajes y telemedicina"
+            else:
+                message += " no se encuentra dentro de nuestras opciones"
+            dispatcher.utter_message(text=str(message))
+            return []
+
+class ValidateTarjetaCreditoForm(FormValidationAction):
+
+    def name(self) -> Text:
+        return "validate_tarjeta_credito_form"
+    
+    @staticmethod
+    def tarjeta_credito_db() -> List[Text]:
+        return [
+            "visa classic",
+            "visa gold",
+            "mastercard standar",
+            "mastercard gold"
+        ]
+    
+    def validar_tarjeta_credito(self, value: Text, dispatcher: "CollectingDispatcher", tracker: Tracker,
+        domain: Dict[Text,Any]) -> List[Dict[Text, Any]]:
+
+        if value.lower() in self.tarjeta_credito_db():
+            return [SlotSet("tipo_tarjeta_credito",value.lower())]
+        else:
+            return [SlotSet("tipo_tarjeta_credito",None)]

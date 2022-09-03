@@ -1,0 +1,14 @@
+[
+  {
+    "name": "cuenta",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "cuenta",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "tarjeta_credito",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  }
+]

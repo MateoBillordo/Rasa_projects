@@ -32,22 +32,26 @@ nlu:
 
 - intent: affirm
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - si
+    - s
+    - sip
+    - por supuesto
+    - correcto
+    - es correcto
+    - todo ok
+    - perfecto
 
 - intent: deny
   examples: |
     - no
     - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - nunca
+    - no lo creo
+    - no me gusta
+    - no realmente
+    - no es correcto
+    - no es lo que pedi
+    - no es lo que buscaba
 
 - intent: mood_great
   examples: |
@@ -114,4 +118,29 @@ nlu:
 - regex: cuenta
   examples: |
     - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+
+
+- intent: consultar_gestion_tarjeta
+  examples: |
+    - quiero gestionar una tarjeta de credito
+    - como gestiono una tarjeta de credito
+    - que tarjetas de credito tienen disponibles?
+    - que tarjetas de credito ofrecen?
+
+- intent: consultar_caracteristicas_tarjetas
+  examples: |
+    - que caracteristicas tiene la tarjeta [visa classic](tarjeta_credito)?
+    - que caracteristicas tiene la tarjeta [visa gold](tarjeta_credito)?
+    - que caracteristicas tiene la tarjeta [mastercard standar](tarjeta_credito)?
+    - que caracteristicas tiene la tarjeta [mastercard gold](tarjeta_credito)?
+
+- intent: solicitar_tarjeta_credito
+  examples: |
+    - quiero gestionar una tarjeta [visa classic](tarjeta_credito)
+    - quiero gestionar una tarjeta [visa gold](tarjeta_credito)
+    - quiero gestionar una tarjeta [mastercard standar](tarjeta_credito)
+    - quiero gestionar una tarjeta [mastercard gold](tarjeta_credito)
+
+- regex: tarjeta_credito
+  examples: |
     - [a-zA-Z]+\s[a-zA-Z]+

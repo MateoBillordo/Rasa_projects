@@ -11,9 +11,21 @@ intents:
   - consultar_creacion_cuenta_bancaria
   - consultar_caracteristicas_tipo_cuenta
   - crear_cuenta
+  - consultar_gestion_tarjeta
+  - consultar_caracteristicas_tarjetas
+  - solicitar_tarjeta_credito
 
 entities:
   - cuenta
+  - tarjeta_credito
+
+actions:
+  - action_listar_cuentas
+  - action_responder_caracteristicas
+  - action_crear_cuenta
+  - action_listar_tarjetas_disponibles
+  - action_responder_caracteristicas_tarjetas
+  - validate_tarjeta_credito_form
 
 slots:
   tipo_cuenta:
@@ -21,11 +33,24 @@ slots:
     mappings:
     - type: from_entity
       entity: cuenta
+  
+  tipo_tarjeta_credito:
+    type: categorical
+    values:
+      - visa classic
+      - visa gold
+      - mastercard standar
+      - mastercard gold
+    mappings:
+    - type: from_entity
+      entity: tarjeta_credito
+      conditions:
+      - active_loop: tarjeta_credito_form
 
-actions:
-  - action_listar_cuentas
-  - action_responder_caracteristicas
-  - action_crear_cuenta
+forms:
+  tarjeta_credito_form:
+    required_slots:
+     - tipo_cuenta
 
 responses:
   utter_greet:
@@ -46,6 +71,12 @@ responses:
 
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
+
+  utter_formulario_completado:
+  - text: "Listo, tu gestion esta siendo procesada"
+
+  utter_tipo_tarjeta_no_valido:
+  - text: "El tipo de tarjeta indicado no se encuentra dentro de los tipos disponibles"
 
 
 session_config:
