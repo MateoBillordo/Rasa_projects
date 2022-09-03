@@ -136,11 +136,21 @@ nlu:
 
 - intent: solicitar_tarjeta_credito
   examples: |
-    - quiero gestionar una tarjeta [visa classic](tarjeta_credito)
-    - quiero gestionar una tarjeta [visa gold](tarjeta_credito)
-    - quiero gestionar una tarjeta [mastercard standar](tarjeta_credito)
-    - quiero gestionar una tarjeta [mastercard gold](tarjeta_credito)
+    - quiero gestionar una tarjeta de credito
+    - quiero una tarjeta de credito
+    - como gestiono una tarjeta de credito?
 
 - regex: tarjeta_credito
   examples: |
     - [a-zA-Z]+\s[a-zA-Z]+
+
+- intent: informar
+  examples: |
+    - tengo una [cuenta universal gratuita](cuenta)
+    - tengo una [caja de ahorro](cuenta)
+    - tengo una [cuenta corriente](cuenta)
+    - tengo una [cuenta sueldo](cuenta)
+    - quiero una [visa classic](tarjeta_credito)
+    - quiero una [visa gold](tarjeta_credito)
+    - quiero una [mastercard standar](tarjeta_credito)
+    - quiero una [mastercard gold](tarjeta_credito)

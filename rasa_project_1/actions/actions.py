@@ -8,6 +8,7 @@
 from email import message
 from multiprocessing.sharedctypes import Value
 import re
+from tkinter.messagebox import NO
 from turtle import st
 from typing import Any, Text, Dict, List
 
@@ -108,10 +109,31 @@ class ValidateTarjetaCreditoForm(FormValidationAction):
             "mastercard gold"
         ]
     
+    @staticmethod
+    def tipo_cuenta_db() -> List[Text]:
+        return [
+            "cuenta universal gratuita",
+            "caja de ahorro",
+            "cuenta corriente",
+            "cuenta sueldo"
+        ]
+
+    def validar_tipo_cuenta(self, value: Text, dispatcher: "CollectingDispatcher", tracker: Tracker,
+        domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        if value.lower() in self.tipo_cuenta_db():
+            return [SlotSet("tipo_cuenta",value.lower())]
+        elif str(value.lower()) == "no tengo cuenta":
+            dispatcher.utter_message(text="Debes tener una cuenta para solicitar una tarjeta")
+        else:
+            dispatcher.utter_message(response="utter_tipo_cuenta_invalido")
+        return [SlotSet("tipo_cuenta",None)]
+
     def validar_tarjeta_credito(self, value: Text, dispatcher: "CollectingDispatcher", tracker: Tracker,
         domain: Dict[Text,Any]) -> List[Dict[Text, Any]]:
 
         if value.lower() in self.tarjeta_credito_db():
             return [SlotSet("tipo_tarjeta_credito",value.lower())]
         else:
+            dispatcher.utter_message(response="utter_tipo_tarjeta_no_valido")
             return [SlotSet("tipo_tarjeta_credito",None)]

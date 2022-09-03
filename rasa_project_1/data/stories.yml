@@ -54,24 +54,23 @@ stories:
   - intent: consultar_caracteristicas_tarjetas
   - action: action_responder_caracteristicas_tarjetas
 
-- story: gestion_tarjeta_credito_exitosa
+- story: gestion_tarjeta_credito_continuar
   steps:
   - intent: solicitar_tarjeta_credito
   - action: tarjeta_credito_form
   - active_loop: tarjeta_credito_form
-  - slot_was_set:
-    - requested_slot: null
+  - action: utter_pregunta_continuar
+  - intent: affirm
+  - action: tarjeta_credito_form
   - active_loop: null
   - action: utter_formulario_completado
 
-- story: gestion_tarjeta_credito_incorrecta
+- story: gestion_tarjeta_credito_cancelar
   steps:
   - intent: solicitar_tarjeta_credito
   - action: tarjeta_credito_form
   - active_loop: tarjeta_credito_form
-  - slot_was_set:
-    - requested_slot: tipo_tarjeta_credito
-  - slot_was_set:
-    - tipo_tarjeta_credito: null
-  - active_loop: null
-  - action: utter_tipo_tarjeta_no_valido
+  - action: utter_pregunta_continuar
+  - intent: deny
+  - action: action_deactivate_loop
+  - action: utter_formulario_completado
