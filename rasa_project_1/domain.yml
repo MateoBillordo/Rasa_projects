@@ -46,14 +46,12 @@ slots:
     mappings:
     - type: from_entity
       entity: tarjeta_credito
-      conditions:
-      - active_loop: tarjeta_credito_form
 
 forms:
   tarjeta_credito_form:
     required_slots:
-     - tipo_cuenta
-     - tipo_tarjeta_credito
+      - tipo_cuenta
+      - tipo_tarjeta_credito
 
 responses:
   utter_greet:
@@ -87,11 +85,8 @@ responses:
   utter_ask_tipo_cuenta:
   - text: "Que tipo de cuenta tenes?"
 
-  utter_ask_tipo_tarjeta:
+  utter_ask_tipo_tarjeta_credito:
   - text: "Que tarjeta te interesa gestionar?"
-
-  utter_pregunta_continuar:
-  - text: "Queres continuar?"
 
 session_config:
   session_expiration_time: 60

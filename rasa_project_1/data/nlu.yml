@@ -72,20 +72,18 @@ nlu:
 
 - intent: mood_unhappy
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - mi dia estuvo horrible
+    - estoy triste
+    - no me siento muy bien
+    - estoy decepcionado
+    - super triste
+    - estoy muy triste
+    - triste
+    - muy triste
+    - infeliz
+    - nada bien
+    - para nada bien
+    - extremadamente triste
 
 - intent: bot_challenge
   examples: |
@@ -115,15 +113,9 @@ nlu:
     - quiero abrir una [cuenta corriente](cuenta)
     - quiero abrir una [cuenta sueldo](cuenta)
 
-- regex: cuenta
-  examples: |
-    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
-    - [a-zA-Z]+\s[a-zA-Z]+
-
 - intent: consultar_gestion_tarjeta
   examples: |
-    - quiero gestionar una tarjeta de credito
-    - como gestiono una tarjeta de credito
+    - como gestiono una tarjeta de credito?
     - que tarjetas de credito tienen disponibles?
     - que tarjetas de credito ofrecen?
 
@@ -138,11 +130,10 @@ nlu:
   examples: |
     - quiero gestionar una tarjeta de credito
     - quiero una tarjeta de credito
-    - como gestiono una tarjeta de credito?
-
-- regex: tarjeta_credito
-  examples: |
-    - [a-zA-Z]+\s[a-zA-Z]+
+    - quiero gestionar una [visa classic](tarjeta_credito)
+    - quiero gestionar una [visa gold](tarjeta_credito)
+    - quiero gestionar una [mastercard standar](tarjeta_credito)
+    - quiero gestionar una [mastercard gold](tarjeta_credito)
 
 - intent: informar
   examples: |
@@ -154,3 +145,12 @@ nlu:
     - quiero una [visa gold](tarjeta_credito)
     - quiero una [mastercard standar](tarjeta_credito)
     - quiero una [mastercard gold](tarjeta_credito)
+
+- regex: cuenta
+  examples: |
+    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+
+
+- regex: tarjeta_credito
+  examples: |
+    - [a-zA-Z]+\s[a-zA-Z]+

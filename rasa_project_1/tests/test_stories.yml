@@ -89,3 +89,38 @@ stories:
       are you a bot?
     intent: bot_challenge
   - action: utter_iamabot
+
+- story: consulta_creacion_de_cuenta
+  steps:
+  - user: |
+      quiero abrir una cuenta
+    intent: consultar_creacion_cuenta_bancaria
+  - action: action_listar_cuentas
+
+- story: consulta_caracteristicas_tipo_cuenta
+  steps:
+  - user: |
+      que caracteristicas tiene la [caja de ahorro](cuenta)?
+    intent: consultar_caracteristicas_tipo_cuenta
+  - action: action_responder_caracteristicas
+
+- story: creacion_de_cuenta
+  steps:
+  - user: |
+      quiero abrir una [caja de ahorro](cuenta)
+    intent: crear_cuenta
+  - action: action_crear_cuenta
+
+- story: consulta_gestion_tarjeta
+  steps:
+  - user: |
+      como gestiono una tarjeta de credito?
+    intent: consultar_gestion_tarjeta
+  - action: action_listar_tarjetas_disponibles
+
+- story: consulta_caracteristicas_tipo_tarjeta
+  steps:
+  - user: |
+      que caracteristicas tiene la tarjeta [visa classic](tarjeta_credito)?
+    intent: consultar_caracteristicas_tarjetas
+  - action: action_responder_caracteristicas_tarjetas

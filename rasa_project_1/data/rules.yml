@@ -11,3 +11,17 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+- rule: activate_tarejta_credito_form
+  steps:
+    - intent: solicitar_tarjeta_credito
+    - action: tarjeta_credito_form
+    - active_loop: tarjeta_credito_form
+
+- rule: enviar_formulario
+  condition:
+  - active_loop: tarjeta_credito_form
+  steps:
+    - action: tarjeta_credito_form
+    - active_loop: null
+    - action: utter_formulario_completado
