@@ -78,4 +78,30 @@ nlu:
     - estoy hablando con un bot?
     - estoy hablando con un humano?
 
-- intent: 
+- intent: avance_de_carrera
+  examples: |
+    - Que materias estas cursando?
+    - Como vas con la carrera?
+    - Cuantas materias te faltan para recibirte?
+    - En que año estas?
+    - Cuantos finales tenes dados? Cuales?
+    - Que optativas pensas hacer?
+
+- intent: preguntas_carrera
+  examples: |
+    - Que carrera estudias?
+    - Te gusta la carrera?
+    - Por que elegiste la carrera?
+    - Que es lo que mas te gusta de la carrera?
+
+- intent: estudio
+  examples: |
+  - Tenes los apuntes de [programacion exploratoria](materia)?
+  - Donde estudias?
+  - Te gusta estudiar solo o en grupo?
+
+- intent: otras_actividades
+  examples: |
+  - Cuales son tus hobbies?
+  - Que te gusta hacer en tu tiempo libre?
+  - Trabajas?

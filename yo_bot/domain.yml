@@ -8,6 +8,10 @@ intents:
   - buen_humor
   - mal_humor
   - retar_al_bot
+  - avance_de_carrera
+  - preguntas_carrera
+  - estudio
+  - otras_actividades
 
 responses:
   utter_soy_un_bot:
