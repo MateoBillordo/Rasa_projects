@@ -1,91 +1,169 @@
 version: "3.1"
 
+# - intent: greet
+#   examples: |
+#     - hey
+#     - hello
+#     - hi
+#     - hello there
+#     - good morning
+#     - good evening
+#     - moin
+#     - hey there
+#     - let's go
+#     - hey dude
+#     - goodmorning
+#     - goodevening
+#     - good afternoon
+
+# - intent: goodbye
+#   examples: |
+#     - cu
+#     - good by
+#     - cee you later
+#     - good night
+#     - bye
+#     - goodbye
+#     - have a nice day
+#     - see you around
+#     - bye bye
+#     - see you later
+
+# - intent: affirm
+#   examples: |
+#     - yes
+#     - y
+#     - indeed
+#     - of course
+#     - that sounds good
+#     - correct
+
+# - intent: deny
+#   examples: |
+#     - no
+#     - n
+#     - never
+#     - I don't think so
+#     - don't like that
+#     - no way
+#     - not really
+
+# - intent: mood_great
+#   examples: |
+#     - perfect
+#     - great
+#     - amazing
+#     - feeling like a king
+#     - wonderful
+#     - I am feeling very good
+#     - I am great
+#     - I am amazing
+#     - I am going to save the world
+#     - super stoked
+#     - extremely good
+#     - so so perfect
+#     - so good
+#     - so perfect
+
+# - intent: mood_unhappy
+#   examples: |
+#     - my day was horrible
+#     - I am sad
+#     - I don't feel very well
+#     - I am disappointed
+#     - super sad
+#     - I'm so sad
+#     - sad
+#     - very sad
+#     - unhappy
+#     - not good
+#     - not very good
+#     - extremly sad
+#     - so saad
+#     - so sad
+
+# - intent: bot_challenge
+#   examples: |
+#     - are you a bot?
+#     - are you a human?
+#     - am I talking to a bot?
+#     - am I talking to a human?
+
 nlu:
-- intent: greet
+- intent: saludar
   examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - hola
+    - holaaa
+    - buenas!
+    - buenasss
+    - buen dia!
+    - buenas tardes!
+    - buendia
+    - buenastardes
+    - wenasss
+    - buenas noches
 
-- intent: goodbye
+- intent: despedirse
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - nos vemos!
+    - chau
+    - hasta luego!
+    - chau chau
+    - chau, hasta luego
+    - que tengas buen dia!
+    - hasta mañana!
 
-- intent: affirm
+- intent: afirmar
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - si
+    - s
+    - totalmente
+    - por supuesto
+    - dale
+    - listo
+    - joya
+    - claro
 
-- intent: deny
+- intent: denegar
   examples: |
     - no
     - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+    - nunca
+    - jamas
+    - no lo creo
+    - no lo creo
+    - no creo
+    - ni ahi
 
-- intent: mood_great
+- intent: buen_humor
   examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+    - perfecto
+    - genial
+    - todo joya
+    - estoy joya
+    - me siento muy bien
+    - me siento bien
+    - bien
+    - divino
+    - excelente
+    - estoy muy bien
+    - estoy bien
 
-- intent: mood_unhappy
+- intent: mal_humor
   examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+    - mi dia estuvo horrible
+    - estoy triste
+    - me siento mal
+    - no estoy bien
+    - triste
+    - no muy bien
+    - mal
+    - mal, no fue un buen dia
 
-- intent: bot_challenge
+- intent: retar_al_bot
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - sos un bot?
+    - sos humano?
+    - estoy hablando con un bot?
+    - estoy hablando con un humano?
+

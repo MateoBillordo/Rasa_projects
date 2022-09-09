@@ -1,13 +1,20 @@
 version: "3.1"
 
 intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  # - greet
+  # - goodbye
+  # - affirm
+  # - deny
+  # - mood_great
+  # - mood_unhappy
+  # - bot_challenge
+  - saludar
+  - despedirse
+  - afirmar
+  - denegar
+  - buen_humor
+  - mal_humor
+  - retar_al_bot
 
 responses:
   utter_greet:
