@@ -84,7 +84,8 @@ nlu:
     - Como vas con la carrera?
     - Cuantas materias te faltan para recibirte?
     - En que año estas?
-    - Cuantos finales tenes dados? Cuales?
+    - Cuantos finales tenes dados? 
+    - Cuales finales tenes dados?
     - Que optativas pensas hacer?
 
 - intent: preguntas_carrera
