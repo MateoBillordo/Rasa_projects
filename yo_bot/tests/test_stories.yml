@@ -1,2 +1,18 @@
 #### This file contains tests to evaluate that your bot behaves as expected.
 #### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+stories:
+
+- story: cuantos_algo
+  steps:
+  - user: |
+      cuantas materias te faltan para recibirte?
+    intent: cuantos
+  - action: action_responder_cuantos
+
+- story: que_o_cuales_algo
+  steps:
+  - user: |
+      que materias estas cursando?
+    intent: que_o_cuales
+  - action: action_responder_que_o_cuales

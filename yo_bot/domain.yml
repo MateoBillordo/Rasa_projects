@@ -8,10 +8,18 @@ intents:
   - buen_humor
   - mal_humor
   - retar_al_bot
-  - avance_de_carrera
+  - cuantos
+  - que_o_cuales
   - preguntas_carrera
   - estudio
   - otras_actividades
+
+entities:
+  - facultad
+
+actions:
+  - action_responder_cuantos
+  - action_responder_que_o_cuales
 
 responses:
   utter_soy_un_bot:

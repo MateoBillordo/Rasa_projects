@@ -78,31 +78,34 @@ nlu:
     - estoy hablando con un bot?
     - estoy hablando con un humano?
 
-- intent: avance_de_carrera
+- intent: cuantos
   examples: |
-    - Que materias estas cursando?
-    - Como vas con la carrera?
-    - Cuantas materias te faltan para recibirte?
-    - En que año estas?
-    - Cuantos finales tenes dados? 
-    - Cuales finales tenes dados?
-    - Que optativas pensas hacer?
+    - cuantas [materias](facultad) te faltan para recibirte?
+    - cuantos [finales](facultad) tenes dados? 
 
-- intent: preguntas_carrera
+- intent: que_o_cuales
   examples: |
-    - Que carrera estudias?
-    - Te gusta la carrera?
-    - Por que elegiste la carrera?
-    - Que es lo que mas te gusta de la carrera?
+    - que [materias](facultad) estas cursando?
+    - que [optativas](facultad) pensas hacer?
+    - cuales [finales](facultad) tenes dados?
+    - que [carrera](facultad) estudias?
 
-- intent: estudio
-  examples: |
-  - Tenes los apuntes de [programacion exploratoria](materia)?
-  - Donde estudias?
-  - Te gusta estudiar solo o en grupo?
+# - intent: preguntas_carrera
+#   examples: |
+#     - Te gusta la carrera?
+#     - Por que elegiste la carrera?
+#     - Que es lo que mas te gusta de la carrera?
+#     - Como vas con la carrera?
+#     - En que año estas?
 
-- intent: otras_actividades
-  examples: |
-  - Cuales son tus hobbies?
-  - Que te gusta hacer en tu tiempo libre?
-  - Trabajas?
+# - intent: estudio
+#   examples: |
+#   - Tenes los apuntes de [programacion exploratoria](materia)?
+#   - Donde estudias?
+#   - Te gusta estudiar solo o en grupo?
+
+# - intent: otras_actividades
+#   examples: |
+#   - Cuales son tus hobbies?
+#   - Que te gusta hacer en tu tiempo libre?
+#   - Trabajas?

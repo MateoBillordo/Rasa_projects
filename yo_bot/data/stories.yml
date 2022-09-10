@@ -2,7 +2,12 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: cuantos_algo
   steps:
-  - intent: greet
-  - action: utter_greet
+  - intent: cuantos
+  - action: action_responder_cuantos
+
+- story: que_o_cuales_algo
+  steps:
+  - intent: que_o_cuales
+  - action: action_responder_que_o_cuales
