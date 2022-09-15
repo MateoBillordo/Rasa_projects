@@ -62,15 +62,19 @@ class ActionResponderQueOCuales(Action):
 
         elemento = tracker.latest_message['entities'][0]['value']
         message = ""
-
+        #la unica forma que se me ocurre de diferenciar las entidades es por su valor. Implica una cadena muy grande de if-else
         if str(elemento) == "materias":
             message += "Lista de "+str(elemento)
         elif str(elemento) == "finales":
             message += "Lista de "+str(elemento)
         elif str(elemento) == "optativas":
             message += "Lista de "+str(elemento)
-        else:
+        elif str(elemento) == "correlativas":
             message += "Lista de "+str(elemento)
+        elif str(elemento) == "carrera":
+            message = "Ingenieria de Sistemas"
+        else:
+            message = "Perdon, no te entendi"
         dispatcher.utter_message(text=str(message))
 
         return []

@@ -89,6 +89,10 @@ nlu:
     - que [optativas](facultad) pensas hacer?
     - cuales [finales](facultad) tenes dados?
     - que [carrera](facultad) estudias?
+  # como diferencio las entidades? si no lo hago me veo obligado a hacer una accion enorme
+    - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes","role":"positivo"} te interesan?
+  # como diferencio entre positivo y negativo? el "no" viene despues de la entidad
+    - que areas del [desarrollo de software]{"entity":"area_de_interes","role":"negativo"} no te interesan?
 
 # - intent: preguntas_carrera
 #   examples: |
