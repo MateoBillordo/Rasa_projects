@@ -1,16 +1,16 @@
 {
-  "saludar": {
+  "cuantos": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 10,
+    "support": 2,
     "confused_with": {}
   },
-  "denegar": {
+  "mal_humor": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 7,
+    "support": 8,
     "confused_with": {}
   },
   "que_o_cuales": {
@@ -27,6 +27,13 @@
     "support": 8,
     "confused_with": {}
   },
+  "denegar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1-score": 1.0,
+    "support": 7,
+    "confused_with": {}
+  },
   "retar_al_bot": {
     "precision": 1.0,
     "recall": 1.0,
@@ -34,18 +41,11 @@
     "support": 4,
     "confused_with": {}
   },
-  "cuantos": {
+  "saludar": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 2,
-    "confused_with": {}
-  },
-  "despedirse": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1-score": 1.0,
-    "support": 7,
+    "support": 10,
     "confused_with": {}
   },
   "buen_humor": {
@@ -55,11 +55,11 @@
     "support": 11,
     "confused_with": {}
   },
-  "mal_humor": {
+  "despedirse": {
     "precision": 1.0,
     "recall": 1.0,
     "f1-score": 1.0,
-    "support": 8,
+    "support": 7,
     "confused_with": {}
   },
   "accuracy": 1.0,

@@ -1,0 +1,14 @@
+[
+  {
+    "text": "cuantas materias te faltan para recibirte?",
+    "entities": [
+      {
+        "start": 8,
+        "end": 16,
+        "value": "materias",
+        "entity": "facultad"
+      }
+    ],
+    "predicted_entities": []
+  }
+]

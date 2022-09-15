@@ -6,13 +6,13 @@ stories:
 - story: cuantos_algo
   steps:
   - user: |
-      cuantas materias te faltan para recibirte?
+      cuantas [materias](facultad) te faltan para recibirte?
     intent: cuantos
   - action: action_responder_cuantos
 
 - story: que_o_cuales_algo
   steps:
   - user: |
-      que materias estas cursando?
+      que [materias](facultad) estas cursando?
     intent: que_o_cuales
   - action: action_responder_que_o_cuales

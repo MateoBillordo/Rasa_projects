@@ -1,10 +1,1 @@
-version: "3.1"
-stories:
-- story: cuantos_algo (.\tests\test_stories.yml)
-  steps:
-  - intent: cuantos  # predicted: cuantos: cuantas [materias](facultad) te faltan para recibirte?
-  - action: action_responder_cuantos
-- story: que_o_cuales_algo (.\tests\test_stories.yml)
-  steps:
-  - intent: que_o_cuales  # predicted: que_o_cuales: que [materias](facultad) estas cursando?
-  - action: action_responder_que_o_cuales
+# None of the test stories failed - all good!
