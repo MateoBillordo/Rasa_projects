@@ -75,30 +75,30 @@ final_aprobado(6123).
 final_aprobado(6211).
 final_aprobado(6213).
 
-cursada_no_aprobada(X):-materia(X,_,_,_,_),not(cursada_aprobada(X)).
+%Imprime todas las materias cursadas
+materias_cursadas:-cursada_aprobada(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
+
+%Imprime todas las materias aprobadas
+materias_aprobadas:-final_aprobado(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
+
+%Imprime los finales adeudados de las materias cursadas
+finales_faltantes_hasta_ahora:-materia(X,Nom,_,_,_),not(final_aprobado(X)),cursada_aprobada(X),writeln(-Nom),fail;nl.
+
+%Imprime las cursadas adeudadas
+cursadas_faltantes:-materia(X,Nom,_,_,_),not(cursada_aprobada(X)),writeln(-Nom),fail;nl.
+
+%Imprime los finales adeudados
+finales_faltantes:-materia(X,Nom,_,_,_),not(final_aprobado(X)),writeln(-Nom),fail;nl.
 
 final_no_aprobado(X):-materia(X,_,_,_,_),not(final_aprobado(X)).
 
-cursada_aprobada_final_no_aprobado(X):-cursada_aprobada(X),final_no_aprobado(X).
+finalesFaltantes(Lista):-findall(X,(materia(X,_,_,_,_),not(final_aprobado(X))),Lista).
 
 sin_correlativas(X):-materia(X,_,_,_,Y),length(Y,0).
 
 al_menos_una_correlativa(X):-materia(X,_,_,_,Y),length(Y,L),L>0.
 
 una_correlativa(X):-materia(X,_,_,_,Y),length(Y,1).
-
-%Consultas que devuelven listas
-materiasCursadas(Lista):-findall(X,cursada_aprobada(X),Lista).
-
-materiasAprobadas(Lista):-findall(X,final_aprobado(X),Lista).
-
-cursadasFaltantes(Lista):-findall(X,cursada_no_aprobada(X),Lista).
-
-finalesFaltantes(Lista):-findall(X,final_no_aprobado(X),Lista).
-
-finalesFaltantesHastaAhora(Lista):-findall(X,cursada_aprobada_final_no_aprobado(X),Lista).
-
-%IMPRESION POR PANTALLA
 
 %Imprime el primer elemento de la lista de correlatividades
 primero_lista([Cabeza|_]):-
@@ -137,18 +137,3 @@ plan_is:-writeln('Plan de Ingenieria de Sistemas'),
         Correlativas=[_|X],primero_lista(Correlativas),imprimir_lista(X))
                    ),
     nl,nl,false;nl.
-
-%Imprime todas las materias cursadas
-materias_cursadas:-cursada_aprobada(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
-
-%Imprime todas las materias aprobadas
-materias_aprobadas:-final_aprobado(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
-
-%Imprime los finales adeudados de las materias cursadas
-finales_faltantes_hasta_ahora:-materia(X,Nom,_,_,_),final_no_aprobado(X),cursada_aprobada(X),writeln(-Nom),fail;nl.
-
-%Imprime las cursadas adeudadas
-cursadas_faltantes:-materia(X,Nom,_,_,_),cursada_no_aprobada(X),writeln(-Nom),fail;nl.
-
-%Imprime los finales adeudados
-finales_faltantes:-materia(X,Nom,_,_,_),final_no_aprobado(X),writeln(-Nom),fail;nl.

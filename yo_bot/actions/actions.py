@@ -41,14 +41,25 @@ class ActionResponderCuantos(Action):
         elemento = tracker.latest_message['entities'][0]['value']
         message = ""
 
-        if str(elemento) == "materias":
-            message += "X cantidad"
-        elif str(elemento) == "finales":
-            message += "X cantidad"
-        elif str(elemento) == "optativas":
-            message += "X cantidad"
-        else:
-            message += "X cantidad"
+        with PrologMQI() as mqi:
+            with mqi.create_thread() as prolog_thread:
+                prolog_thread.query_async("consult('plan_de_estudios.pl')", find_all=False)
+                if str(elemento) == "materias":
+                    prolog_thread.query_async("materiasCursadas(X)", find_all=False)
+                    result = prolog_thread.query_async_result()
+                    message = str(len(result))
+
+                elif str(elemento) == "finales":
+                    prolog_thread.query_async("materiasAprobadas(X)", find_all=False)
+                    result = prolog_thread.query_async_result()
+                    message = str(len(result))
+
+                elif str(elemento) == "optativas":
+                    message += "Cant de "+str(elemento)
+
+                else:
+                    message = "Perdon, no te entendi"
+
         dispatcher.utter_message(text=str(message))
 
         return []
@@ -70,27 +81,28 @@ class ActionResponderQueOCuales(Action):
                 #la unica forma que se me ocurre de diferenciar las entidades es por su valor. Implica una cadena muy grande de if-else
                 prolog_thread.query_async("consult('plan_de_estudios.pl')", find_all=False)
                 if str(elemento) == "materias":
-                    prolog_thread.query_async("findall(X,cursada_aprobada(X),CursadasAprob)", find_all=False)
                     #message += "Lista de "+str(elemento)
+                    prolog_thread.query_async("materiasCursadas(X)", find_all=False)
+                    result = prolog_thread.query_async_result()
+                    for valor in result.values():
+                        message += str(valor) + " "
+
                 elif str(elemento) == "finales":
-                    prolog_thread.query_async("findall(X,final_aprobado(X),FinalesAprob)", find_all=False)
                     # message += "Lista de "+str(elemento)
+                    prolog_thread.query_async("materiasAprobadas(X)", find_all=False)
+                    result = prolog_thread.query_async_result()
+                    for valor in result.values():
+                        message += str(valor) + " "
+
                 elif str(elemento) == "optativas":
-                    prolog_thread.query_async("", find_all=False)
-                    # message += "Lista de "+str(elemento)
-                elif str(elemento) == "correlativas":
-                    prolog_thread.query_async("", find_all=False)
-                    # message += "Lista de "+str(elemento)
+                    #prolog_thread.query_async("", find_all=False)
+                    message += "Lista de "+str(elemento)
+
                 elif str(elemento) == "carrera":
-                    prolog_thread.query_async("", find_all=False)
-                    # message = "Ingenieria de Sistemas"
+                    message = "Ingenieria de Sistemas"
+
                 else:
-                    prolog_thread.query_async("", find_all=False)
-                    # message = "Perdon, no te entendi"
-                
-                result = prolog_thread.query_async_result()
-                for valor in result.values():
-                    message += str(valor) + " "
+                    message = "Perdon, no te entendi"
 
         dispatcher.utter_message(text=str(message))
 

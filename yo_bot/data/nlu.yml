@@ -82,6 +82,7 @@ nlu:
   examples: |
     - cuantas [materias](facultad) te faltan para recibirte?
     - cuantos [finales](facultad) tenes dados? 
+    - cuantas [optativas](facultad) pensas hacer?
 
 - intent: que_o_cuales
   examples: |
