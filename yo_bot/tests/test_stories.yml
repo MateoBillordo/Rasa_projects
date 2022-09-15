@@ -13,6 +13,6 @@ stories:
 - story: que_o_cuales_algo
   steps:
   - user: |
-      que [materias](facultad) estas cursando?
+      que [materias](facultad) cursaste?
     intent: que_o_cuales
   - action: action_responder_que_o_cuales

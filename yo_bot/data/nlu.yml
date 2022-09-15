@@ -85,14 +85,14 @@ nlu:
 
 - intent: que_o_cuales
   examples: |
-    - que [materias](facultad) estas cursando?
-    - que [optativas](facultad) pensas hacer?
+    - que [materias](facultad) cursaste?
     - cuales [finales](facultad) tenes dados?
+    - que [optativas](facultad) pensas hacer?
     - que [carrera](facultad) estudias?
-  # como diferencio las entidades? si no lo hago me veo obligado a hacer una accion enorme
     - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes","role":"positivo"} te interesan?
-  # como diferencio entre positivo y negativo? el "no" viene despues de la entidad
     - que areas del [desarrollo de software]{"entity":"area_de_interes","role":"negativo"} no te interesan?
+  #como diferencio entre positivo y negativo? el "no" viene despues de la entidad
+  #como diferencio las entidades? si no lo hago me veo obligado a hacer una accion enorme
 
 # - intent: preguntas_carrera
 #   examples: |

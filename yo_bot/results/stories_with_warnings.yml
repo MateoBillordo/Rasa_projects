@@ -1,8 +1,0 @@
-version: "3.1"
-stories:
-- story: que_o_cuales_algo (.\tests\test_stories.yml)
-  steps:
-  - intent: que_o_cuales
-    entities:
-    - facultad: materias
-  - action: action_responder_que_o_cuales  # predicted: action_unlikely_intent
