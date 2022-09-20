@@ -88,15 +88,15 @@ al_menos_una_correlativa(X):-materia(X,_,_,_,Y),length(Y,L),L>0.
 una_correlativa(X):-materia(X,_,_,_,Y),length(Y,1).
 
 %Consultas que devuelven listas
-materiasCursadas(Lista):-findall(X,cursada_aprobada(X),Lista).
+materiasCursadas(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada(Cod)),Lista).
 
-materiasAprobadas(Lista):-findall(X,final_aprobado(X),Lista).
+materiasAprobadas(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),final_aprobado(Cod)),Lista).
 
-cursadasFaltantes(Lista):-findall(X,cursada_no_aprobada(X),Lista).
+cursadasFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_no_aprobada(Cod)),Lista).
 
-finalesFaltantes(Lista):-findall(X,final_no_aprobado(X),Lista).
+finalesFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),final_no_aprobado(Cod)),Lista).
 
-finalesFaltantesHastaAhora(Lista):-findall(X,cursada_aprobada_final_no_aprobado(X),Lista).
+finalesFaltantesHastaAhora(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada_final_no_aprobado(Cod)),Lista).
 
 %IMPRESION POR PANTALLA
 
