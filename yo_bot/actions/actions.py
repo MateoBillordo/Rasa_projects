@@ -46,8 +46,9 @@ class ActionResponderCuantos(Action):
                 prolog_thread.query_async(r"consult('C:\\Rasa_projects\\Rasa_projects\\yo_bot\\data\\datos_academicos.pl')", find_all=False)
                 if str(elemento) == "materias":
                     prolog_thread.query_async("materiasCursadas(X)", find_all=False)
-                    result = prolog_thread.query_async_result()
-                    message = str(len(result))
+                    result = prolog_thread.query_async_result()[0]['X'] #obtengo la lista de prolog
+                    
+                    message = ""
 
                 elif str(elemento) == "finales":
                     prolog_thread.query_async("materiasAprobadas(X)", find_all=False)
