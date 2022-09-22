@@ -32,7 +32,7 @@ class ActionHelloWorld(Action):
 
 class ConsultarAProlog():
 
-    def consulta(self,motivo) -> List[Text]:
+    def consulta(motivo) -> List[Text]:
         result = []
         with PrologMQI() as mqi:
             with mqi.create_thread() as prolog_thread:
