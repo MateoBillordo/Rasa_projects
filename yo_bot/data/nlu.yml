@@ -80,9 +80,9 @@ nlu:
 
 - intent: cuantos
   examples: |
-    - cuantas [materias](facultad) te faltan para recibirte?
+    - cuantas [materias](facultad) cursaste?
     - cuantos [finales](facultad) tenes dados? 
-    - cuantas [optativas](facultad) pensas hacer?
+  # - cuantas [optativas](facultad) pensas hacer?
 
 - intent: que_o_cuales
   examples: |
@@ -90,8 +90,8 @@ nlu:
     - cuales [finales](facultad) tenes dados?
     - que [optativas](facultad) pensas hacer?
     - que [carrera](facultad) estudias?
-    - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes"} [te interesan]{"entity":"positividad","value":"true"}?
-    - que areas del [desarrollo de software]{"entity":"area_de_interes"} [no te interesan]{"entity":"positividad","value":"false"}?
+  # - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes"} [te interesan]{"entity":"positividad","value":"true"}?
+  # - que areas del [desarrollo de software]{"entity":"area_de_interes"} [no te interesan]{"entity":"positividad","value":"false"}?
 
 # - intent: preguntas_carrera
 #   examples: |

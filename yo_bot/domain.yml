@@ -16,7 +16,7 @@ intents:
 
 entities:
   - facultad
-  - area_de_interes
+  # - area_de_interes
 
 actions:
   - action_responder_cuantos

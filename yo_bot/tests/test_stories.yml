@@ -6,7 +6,7 @@ stories:
 - story: cuantos_algo
   steps:
   - user: |
-      cuantas [materias](facultad) te faltan para recibirte?
+      cuantas [materias](facultad) cursaste?
     intent: cuantos
   - action: action_responder_cuantos
 
