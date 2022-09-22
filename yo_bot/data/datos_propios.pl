@@ -75,6 +75,28 @@ final_aprobado(6123).
 final_aprobado(6211).
 final_aprobado(6213).
 
+%Cursando actualmente
+
+cursando(6321).
+cursando(6322).
+cursando(6323).
+cursando(6324).
+cursando(6325).
+
+%Areas de interes
+
+interesa('machine mearning').
+interesa('mobile development').
+interesa('ciberseguridad').
+interesa('hacking etico').
+interesa('web development').
+
+%Areas de no interes
+
+no_interesa('').
+
+%Consultas sobre las materias
+
 cursada_no_aprobada(X):-materia(X,_,_,_,_),not(cursada_aprobada(X)).
 
 final_no_aprobado(X):-materia(X,_,_,_,_),not(final_aprobado(X)).
@@ -88,6 +110,8 @@ al_menos_una_correlativa(X):-materia(X,_,_,_,Y),length(Y,L),L>0.
 una_correlativa(X):-materia(X,_,_,_,Y),length(Y,1).
 
 %Consultas que devuelven listas
+cursandoMaterias(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada(Cod)),Lista).
+
 materiasCursadas(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada(Cod)),Lista).
 
 materiasAprobadas(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),final_aprobado(Cod)),Lista).

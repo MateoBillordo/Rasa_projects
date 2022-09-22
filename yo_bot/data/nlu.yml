@@ -80,18 +80,25 @@ nlu:
 
 - intent: cuantos
   examples: |
-    - cuantas [materias](facultad) cursaste?
-    - cuantos [finales](facultad) tenes dados? 
-  # - cuantas [optativas](facultad) pensas hacer?
+    - cuantas [materias]{"entity":"facultad","role":"cursando","value":"cursadas"} estas cursando?
+    - cuantas [materias]{"entity":"facultad","role":"aprobado","value":"cursadas"} cursaste?
+    - cuantos [finales]{"entity":"facultad","role":"aprobado","value":"finales"} tenes dados?
+    - cuantos [finales]{"entity":"facultad","role":"adeudado","value":"finales"} debes? 
+    
 
 - intent: que_o_cuales
   examples: |
-    - que [materias](facultad) cursaste?
-    - cuales [finales](facultad) tenes dados?
-    - que [optativas](facultad) pensas hacer?
+    - que [materias]{"entity":"facultad","role":"aprobado","value":"cursadas"} cursaste?
+    - cuales [finales]{"entity":"facultad","role":"aprobado","value":"finales"} tenes dados?
+    - que [finales]{"entity":"facultad","role":"adeudado","value":"finales"} debes?
     - que [carrera](facultad) estudias?
-  # - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes"} [te interesan]{"entity":"positividad","value":"true"}?
-  # - que areas del [desarrollo de software]{"entity":"area_de_interes"} [no te interesan]{"entity":"positividad","value":"false"}?
+    - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes"} [te interesan]{"entity":"positividad","value":"positivo"}?
+    - cuales areas del [desarrollo de software]{"entity":"area_de_interes"} [no te interesan]{"entity":"positividad","value":"negativo"}?
+
+- regex: area_de_interes
+  examples: |
+    - [a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+
+    - [a-zA-Z]+ [a-zA-Z]+
 
 # - intent: preguntas_carrera
 #   examples: |
