@@ -85,7 +85,7 @@ cursando(6325).
 
 %Areas de interes
 
-interesa('machine mearning').
+interesa('machine learning').
 interesa('mobile development').
 interesa('ciberseguridad').
 interesa('hacking etico').

@@ -82,8 +82,8 @@ nlu:
   examples: |
     - cuantas [materias]{"entity":"facultad","value":"cursadas"} estas [cursando]{"entity":"tiempo","value":"presente"}?
     - cuantas [materias]{"entity":"facultad","value":"cursadas"} [cursaste]{"entity":"tiempo","value":"pasado"}?
-    - cuantos [finales]{"entity":"facultad","value":"finales"} [rendiste]{"entity":"tiempo","value":"pasado"}?
-    - cuantos [finales]{"entity":"facultad","value":"finales"} [debes]{"entity":"tiempo","value":"presente"}? 
+    - cuantos [finales](facultad) [rendiste]{"entity":"tiempo","value":"pasado"}?
+    - cuantos [finales](facultad) [debes]{"entity":"tiempo","value":"presente"}? 
     - cuantas [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - cuantas [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     
@@ -97,13 +97,34 @@ nlu:
     - cuales [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - que [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     - que [carrera](facultad) estudias?
-    - que areas involucradas con el [desarrollo de software]{"entity":"area_de_interes"} [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
-    - cuales areas del [desarrollo de software]{"entity":"area_de_interes"} [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
+    - que areas involucradas con el desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
+    - cuales areas del desarrollo de [software](area_de_interes) [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
 
-- regex: area_de_interes
+# - regex: area_de_interes
+#   examples: |
+#     - [a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+
+#     - [a-zA-Z]+ [a-zA-Z]+
+
+- lookup: area_de_interes
   examples: |
-    - [a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+
-    - [a-zA-Z]+ [a-zA-Z]+
+    - desarrollo de software
+    - machine learning
+    - mobile development
+    - ciberseguridad
+    - hacking etico
+    - web development
+    - desarrollo de sistemas embebidos
+    - desarrollo de software de gestion
+    - desarrollo de software orientado a la comunidad cientifica
+    - desarrollo de videojuegos
+    - realidad virtual y aumentada
+
+- intent: por_que
+  examples: |
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [machine learning](area_de_interes)?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} la ciberseguridad?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
 
 # - intent: preguntas_carrera
 #   examples: |

@@ -28,8 +28,6 @@ responses:
   - text: "Soy un bot."
 
   utter_saludar:
-  - text: "Hola! Como estas?"
-  - text: "Hola, todo bien?"
   - text: "Hola!"
 
   utter_despedirse:
