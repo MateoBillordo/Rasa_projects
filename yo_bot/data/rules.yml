@@ -1,3 +1,13 @@
 version: "3.1"
 
 rules:
+
+- rule: saludar cada vez que el usuario saluda
+  steps:
+  - intent: saludar
+  - action: utter_saludar
+
+- rule: despedirse cada vez que el usuario se despoide
+  steps:
+  - intent: despedirse
+  - action: utter_despedirse

@@ -90,10 +90,14 @@ interesa('mobile development').
 interesa('ciberseguridad').
 interesa('hacking etico').
 interesa('web development').
+interesa('desarrollo de sistemas embebidos').
 
 %Areas de no interes
 
-no_interesa('').
+no_interesa('desarrollo de software de gestion').
+no_interesa('desarrollo de software orientado a la comunidad cientifica').
+no_interesa('desarrollo de videojuegos').
+no_interesa('realidad virtual y aumentada').
 
 %Consultas sobre las materias
 
@@ -121,6 +125,10 @@ cursadasFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_no_aprobad
 finalesFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),final_no_aprobado(Cod)),Lista).
 
 finalesFaltantesHastaAhora(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada_final_no_aprobado(Cod)),Lista).
+
+areasDeInteres(Lista):-findall(X,interesa(X),Lista).
+
+areasDeNoInteres(Lista):-findall(X,no_interesa(X),Lista).
 
 %IMPRESION POR PANTALLA
 

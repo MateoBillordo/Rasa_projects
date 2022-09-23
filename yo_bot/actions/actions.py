@@ -32,29 +32,37 @@ class ActionHelloWorld(Action):
 
 class ConsultarAProlog():
 
-    def consulta(motivo) -> List[Text]:
+    def consulta(motivos) -> List[Text]:
         result = []
         with PrologMQI() as mqi:
             with mqi.create_thread() as prolog_thread:
                 prolog_thread.query_async(r"consult('C:\\Rasa_projects\\Rasa_projects\\yo_bot\\data\\datos_propios.pl')", find_all=False)
                 
-                if str(motivo['value']) == "cursadas":
+                if str(motivos[0]['value']) == "cursadas":
                     
-                    if str(motivo['role']) == "aprobado":
+                    if str(motivos[1]['value']) == "pasado":
                         prolog_thread.query_async("materiasCursadas(X)", find_all=False)
-                    elif str(motivo['role']) == "cursando":
+                    elif str(motivos[1]['value']) == "presente":
                         prolog_thread.query_async("cursandoMaterias(X)", find_all=False)
-                    else:
-                        prolog_thread.query_async("cursadasFaltantes(X)",find_all=False)
+                    # else:
+                    #     prolog_thread.query_async("cursadasFaltantes(X)",find_all=False)
 
-                elif str(motivo['value']) == "finales":
+                elif str(motivos[0]['value']) == "finales":
 
-                    if str(motivo['role']) == "aprobado":
+                    if str(motivos[1]['value']) == "pasado":
                         prolog_thread.query_async("materiasAprobadas(X)",find_all=False)
-                    elif str(motivo['role']) == "adeudado":
-                        prolog_thread.query_async("finalesFaltantesHastaAhora(X)",find_all=False)
-                    else:
+                    elif str(motivos[1]['value']) == "presente":
                         prolog_thread.query_async("finalesFaltantes(X)",find_all=False)
+                    # else:
+                        # prolog_thread.query_async("finalesFaltantesHastaAhora(X)",find_all=False)
+                
+                elif str(motivos[0]['value']) == "desarrollo de software":
+
+                    if str(motivos[1]['role']) == "positivo":
+                        prolog_thread.query_async("areasDeInteres(X)",find_all=False)
+                    else:
+                        prolog_thread.query_async("areasDeNoInteres(X)",find_all=False)
+
 
                 result = prolog_thread.query_async_result()[0]['X'] #obtengo la lista de prolog
 
@@ -70,8 +78,15 @@ class ActionResponderCuantos(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         message = ""
-        motivoConsulta = tracker.latest_message['entities'][0]
-        result = ConsultarAProlog.consulta(motivoConsulta)
+        result = []
+        motivosConsulta = tracker.latest_message['entities']
+        if str(motivosConsulta[0]['value']) == "optativas":
+            if str(motivosConsulta[1]['value']) == "pasado":
+                message = "Todavia no hice ninguna optativa"
+            else:
+                message = "Todavia no investigue sobre las optativas disponibles"
+        else:
+            result = ConsultarAProlog.consulta(motivosConsulta)
         tamanio = len(result)
 
         if tamanio > 0:
@@ -93,11 +108,17 @@ class ActionResponderQueOCuales(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         message = ""
-        motivoConsulta = tracker.latest_message['entities'][0]
-        if str(motivoConsulta['value']) == "carrera":
+        result = []
+        motivosConsulta = tracker.latest_message['entities']
+        if str(motivosConsulta[0]['value']) == "carrera":
             message = "Ingenieria de Sistemas"
+        elif str(motivosConsulta[0]['value']) == "optativas":
+            if str(motivosConsulta[1]['value']) == "pasado":
+                message = "Todavia no hice ninguna optativa"
+            else:
+                message = "Todavia no investigue sobre las optativas disponibles"
         else:
-            result = ConsultarAProlog.consulta(motivoConsulta)
+            result = ConsultarAProlog.consulta(motivosConsulta)
         
             tamanio = len(result)
 

@@ -18,7 +18,6 @@ entities:
   - facultad
   - area_de_interes
   - tiempo
-  - positividad
 
 actions:
   - action_responder_cuantos
@@ -30,9 +29,13 @@ responses:
 
   utter_saludar:
   - text: "Hola! Como estas?"
+  - text: "Hola, todo bien?"
+  - text: "Hola!"
 
   utter_despedirse:
   - text: "Hasta luego!"
+  - text: "Nos vemos!"
+  - text: "Chau"
 
 session_config:
   session_expiration_time: 60
