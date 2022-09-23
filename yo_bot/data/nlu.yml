@@ -97,17 +97,11 @@ nlu:
     - cuales [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - que [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     - que [carrera](facultad) estudias?
-    - que areas involucradas con el desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
+    - que areas del desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
     - cuales areas del desarrollo de [software](area_de_interes) [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
-
-# - regex: area_de_interes
-#   examples: |
-#     - [a-zA-Z]+ [a-zA-Z]+ [a-zA-Z]+
-#     - [a-zA-Z]+ [a-zA-Z]+
 
 - lookup: area_de_interes
   examples: |
-    - desarrollo de software
     - machine learning
     - mobile development
     - ciberseguridad
