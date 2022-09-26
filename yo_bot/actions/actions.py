@@ -39,13 +39,10 @@ class ConsultarAProlog():
                 prolog_thread.query_async(r"consult('C:\\Rasa_projects\\Rasa_projects\\yo_bot\\data\\datos_propios.pl')", find_all=False)
                 
                 if str(motivos[0]['value']) == "cursadas":
-                    
                     if str(motivos[1]['value']) == "pasado":
                         prolog_thread.query_async("materiasCursadas(X)", find_all=False)
                     elif str(motivos[1]['value']) == "presente":
                         prolog_thread.query_async("cursandoMaterias(X)", find_all=False)
-                    # else:
-                    #     prolog_thread.query_async("cursadasFaltantes(X)",find_all=False)
 
                 elif str(motivos[0]['value']) == "finales":
 
@@ -53,18 +50,16 @@ class ConsultarAProlog():
                         prolog_thread.query_async("materiasAprobadas(X)",find_all=False)
                     elif str(motivos[1]['value']) == "presente":
                         prolog_thread.query_async("finalesFaltantes(X)",find_all=False)
-                    # else:
-                        # prolog_thread.query_async("finalesFaltantesHastaAhora(X)",find_all=False)
                 
-                elif str(motivos[0]['value']) == "desarrollo de software":
-
+                elif str(motivos[0]['value']) == "software":
                     if str(motivos[1]['role']) == "positivo":
                         prolog_thread.query_async("areasDeInteres(X)",find_all=False)
                     else:
                         prolog_thread.query_async("areasDeNoInteres(X)",find_all=False)
 
-
-                result = prolog_thread.query_async_result()[0]['X'] #obtengo la lista de prolog
+                retorno = prolog_thread.query_async_result()
+                if (type(retorno) != bool): #si es bool ninguna de las consultas anteriores se ejecuto
+                    result = retorno[0]['X'] #obtengo la lista de prolog
 
         return result
 

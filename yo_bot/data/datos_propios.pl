@@ -114,7 +114,7 @@ al_menos_una_correlativa(X):-materia(X,_,_,_,Y),length(Y,L),L>0.
 una_correlativa(X):-materia(X,_,_,_,Y),length(Y,1).
 
 %Consultas que devuelven listas
-cursandoMaterias(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada(Cod)),Lista).
+cursandoMaterias(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursando(Cod)),Lista).
 
 materiasCursadas(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada(Cod)),Lista).
 
