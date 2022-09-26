@@ -123,7 +123,10 @@ class ActionResponderQueOCuales(Action):
                 for i in range(0,tamanio-1):
                     message += result[i] + ', '
                 message = message.rstrip(', ')
-                message += ' y ' + result[tamanio-1]
+                if (result[tamanio-1][0].lower == "i" or result[tamanio-1][0] == "I"):
+                    message += ' e ' + result[tamanio-1]
+                else:
+                    message += ' y ' + result[tamanio-1]
             else:
                 message = "Perdon, no te entendi"
 
