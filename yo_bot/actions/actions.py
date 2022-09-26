@@ -133,3 +133,18 @@ class ActionResponderQueOCuales(Action):
         dispatcher.utter_message(text=str(message))
 
         return []
+
+class ActionPorque(Action):
+
+    def name(self) -> Text:
+        return "action_responder_porque"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        pregunta = next(tracker.get_latest_entity_values("area_de_interes"),None)
+
+        
+
+        return []

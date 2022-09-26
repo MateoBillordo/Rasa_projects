@@ -22,6 +22,7 @@ entities:
 actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
+  - action_responder_porque
 
 responses:
   utter_soy_un_bot:
