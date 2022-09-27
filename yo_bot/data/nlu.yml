@@ -113,15 +113,9 @@ nlu:
     - Juan Francisco
     - Tomas
     - Analia
+    - Marcelo
     - Nelson
     - Matias
-
-- intent: preguntar_nombre
-  examples: |
-    - como me llamo?
-    - sabes mi nombre?
-    - te acordas mi nombre?
-    - decime mi nombre
 
 - intent: cuantos
   examples: |

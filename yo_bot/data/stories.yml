@@ -2,19 +2,19 @@ version: "3.1"
 
 stories:
 
-- story: saludar
+- story: saludo
   steps:
   - intent: saludar
   - checkpoint: comprobar_nombre
 
-- story: saludar usuario conocido
+- story: saludo usuario conocido
   steps:
   - checkpoint: comprobar_nombre
   - slot_was_set:
     - nombre: not null
   - action: utter_saludo_personalizado
 
-- story: saludar usuario desconocido
+- story: saludo usuario desconocido
   steps:
   - checkpoint: comprobar_nombre
   - slot_was_set:

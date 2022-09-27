@@ -30,13 +30,7 @@ actions:
 slots:
   nombre:
     type: text
-    mappings:
-    - type: from_entity
-      entity: nombre
-
-  usuario_conocido:
-    type: bool
-    initial_value: false
+    initial_value: null
     mappings:
     - type: from_entity
       entity: nombre
@@ -55,9 +49,6 @@ responses:
   - text: "Hola {nombre}, que gusto volver a hablar con vos!"
   - text: "Hola {nombre}, tanto tiempo!"
   - text: "Hola {nombre}!"
-
-  utter_no_recuerdo_nombre:
-  - text: "Perdon, no lo recuerdo"
 
   utter_preguntar_nombre:
   - text: "Como te llamas?"
