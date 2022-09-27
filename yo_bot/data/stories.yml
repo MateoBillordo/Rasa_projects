@@ -11,14 +11,14 @@ stories:
   steps:
   - checkpoint: comprobar_nombre
   - slot_was_set:
-    - usuario_conocido: true
+    - nombre: not null
   - action: utter_saludo_personalizado
 
 - story: saludar usuario desconocido
   steps:
   - checkpoint: comprobar_nombre
   - slot_was_set:
-    - usuario_conocido: false
+    - nombre: null
   - action: utter_saludar
   - action: utter_preguntar_nombre
   - intent: presentacion
