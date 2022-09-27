@@ -78,6 +78,51 @@ nlu:
     - estoy hablando con un bot?
     - estoy hablando con un humano?
 
+- intent: presentacion
+  examples: |
+    - me llamo [Mateo](nombre)
+    - me dicen Juan
+    - llamame Martino
+    - mi nombre es Joaquin
+    - Agustin
+
+- lookup: nombre
+  examples: |
+    - Mateo
+    - Mateo Tomas
+    - Maria
+    - Juan Manuel
+    - Franco
+    - Diego
+    - Camila
+    - Damiana
+    - Juan
+    - Martino
+    - Joaquin
+    - Agustin
+    - Luisina
+    - Sol
+    - Ximena
+    - Delfina
+    - Pia
+    - David
+    - Martin
+    - Leonel
+    - Juan Ignacio
+    - Juan Cruz
+    - Juan Francisco
+    - Tomas
+    - Analia
+    - Nelson
+    - Matias
+
+- intent: preguntar_nombre
+  examples: |
+    - como me llamo?
+    - sabes mi nombre?
+    - te acordas mi nombre?
+    - decime mi nombre
+
 - intent: cuantos
   examples: |
     - cuantas [materias]{"entity":"facultad","value":"cursadas"} estas [cursando]{"entity":"tiempo","value":"presente"}?
@@ -91,9 +136,9 @@ nlu:
 - intent: que_o_cuales
   examples: |
     - cuales [materias]{"entity":"facultad","value":"cursadas"} estas [cursando]{"entity":"tiempo","value":"presente"}?
-    - que [materias]{"entity":"facultad","role":"aprobado","value":"cursadas"} [cursaste]{"entity":"tiempo","value":"pasado"}?
-    - cuales [finales]{"entity":"facultad","role":"aprobado","value":"finales"} [rendiste]{"entity":"tiempo","value":"pasado"}?
-    - que [finales]{"entity":"facultad","role":"adeudado","value":"finales"} [debes]{"entity":"tiempo","value":"presente"}?
+    - que [materias]{"entity":"facultad","value":"cursadas"} [cursaste]{"entity":"tiempo","value":"pasado"}?
+    - cuales [finales]{"entity":"facultad","value":"finales"} [rendiste]{"entity":"tiempo","value":"pasado"}?
+    - que [finales]{"entity":"facultad","value":"finales"} [debes]{"entity":"tiempo","value":"presente"}?
     - cuales [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - que [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     - que [carrera](facultad) estudias?
@@ -115,8 +160,8 @@ nlu:
 
 - intent: por_que
   examples: |
-    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [machine learning](area_de_interes)?
-    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} la ciberseguridad?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} la [ciberseguridad](area_de_interes)?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el machine learning?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
 

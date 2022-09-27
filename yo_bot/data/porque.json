@@ -1,12 +1,42 @@
 {
-    "machine learning":"",
-    "mobile development":"",
-    "ciberseguridad":"",
-    "hacking etico":"",
-    "web development":"",
-    "desarrollo de sistemas embebidos":"",
-    "desarrollo de software de gestion":"",
-    "desarrollo de software orientado a la comunidad cientifica":"",
-    "desarrollo de videojuegos":"",
-    "realidad virtual y aumentada":""
+    "machine learning":{
+        "interesa":"si",
+        "porque":"me genera curiosidad, me resulta interesante y pienso que podria tener muchas aplicaciones en un futuro no muy lejano"
+    },
+    "mobile development":{
+        "interesa":"si",
+        "porque":"siempre quise desarrollar una app mobile que sea simple de usar y eficiente"
+    },
+    "ciberseguridad":{
+        "interesa":"si",
+        "porque":"creo que es algo en lo que todos los usuarios de un dispositivo con acceso a internet deberiamos interesarnos, la ignorancia puede poner en juego nuestra informacion en la red"
+    },
+    "hacking etico":{
+        "interesa":"si",
+        "porque":"llamo mi atencion a traves de la serie Mr. Robot"
+    },
+    "web development":{
+        "interesa":"si",
+        "porque":"creo que es esencial saber desarrollar webs bien optimizadas para poder independizar su uso del dispositivo desde el que se la accede, evitando asi el desarrollo de aplicaciones moviles innecesarias"
+    },
+    "desarrollo de sistemas embebidos":{
+        "interesa":"si",
+        "porque":"simplemente llama mucho mi atencion el desarrollo de sistemas electronicos para fines especificos"
+    },
+    "desarrollo de software de gestion":{
+        "interesa":"no",
+        "porque":"no me resulta interesante, ademas de que pocas organizaciones estan dispuestas a cambiar su sistema de gestion"
+    },
+    "desarrollo de software orientado a la comunidad cientifica":{
+        "interesa":"no",
+        "porque":"no llama mi atencion en lo absoluto, requeriria interiorizarme en conocimientos avanzados de matematica, fisica, biologia, etc. lo cual no es de mi agrado"
+    },
+    "desarrollo de videojuegos":{
+        "interesa":"no",
+        "porque":"si bien me gustan los videojuegos, es de mi conocimiento que no es un trabajo facil, implica mucho estres y poco descanso si se hace de forma indie, y si se hace bajo el mando de una desarrolladora de videojuegos se suele trabajar con mucha presion por las fechas de entrega"
+    },
+    "realidad virtual y aumentada":{
+        "interesa":"no",
+        "porque":"por mas que me resulte una tecnologia curiosa e interesante, no puedo ver aplicaciones cotidianas de la misma mas que para fines recreativos"
+    }
 }

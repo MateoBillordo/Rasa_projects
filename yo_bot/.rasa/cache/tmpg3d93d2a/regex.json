@@ -1,6 +1,0 @@
-[
-  {
-    "name": "area_de_interes",
-    "pattern": "(\\bmachine\\ learning\\b|\\bmobile\\ development\\b|\\bciberseguridad\\b|\\bhacking\\ etico\\b|\\bweb\\ development\\b|\\bdesarrollo\\ de\\ sistemas\\ embebidos\\b|\\bdesarrollo\\ de\\ software\\ de\\ gestion\\b|\\bdesarrollo\\ de\\ software\\ orientado\\ a\\ la\\ comunidad\\ cientifica\\b|\\bdesarrollo\\ de\\ videojuegos\\b|\\brealidad\\ virtual\\ y\\ aumentada\\b)"
-  }
-]

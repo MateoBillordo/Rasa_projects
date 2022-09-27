@@ -8,30 +8,36 @@
 # This is a simple example for a custom action which utters "Hello World!"
 
 from email import message
+from re import T
 from typing import Any, Text, Dict, List
-from unittest import result
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from swiplserver import PrologMQI
+import os.path
+import json
 
-from swiplserver import PrologMQI, PrologThread
 
+class OperarArchivo():
 
-class ActionHelloWorld(Action):
+    @staticmethod
+    def guardar(AGuardar,ruta):
+        with open(ruta,"w") as archivo_descarga:
+            json.dump(AGuardar, archivo_descarga, indent=4)
+        archivo_descarga.close()
 
-    def name(self) -> Text:
-        return "action_hello_world"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        dispatcher.utter_message(text="Hello World!")
-
-        return []
+    @staticmethod
+    def cargarArchivo(ruta): 
+        if os.path.isfile(ruta):
+            with open(ruta,"r") as archivo_carga:
+                retorno=json.load(archivo_carga)
+                archivo_carga.close()
+        else:
+            retorno={}
+        return retorno
 
 class ConsultarAProlog():
 
+    @staticmethod
     def consulta(motivos) -> List[Text]:
         result = []
         with PrologMQI() as mqi:
@@ -143,8 +149,24 @@ class ActionPorque(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        pregunta = next(tracker.get_latest_entity_values("area_de_interes"),None)
-
+        message = "Perdon, no te entendi"
+        positivo = next(tracker.get_latest_entity_values("tiempo","positivo"),None)
+        negativo = next(tracker.get_latest_entity_values("tiempo","negativo"),None)
+        interes = next(tracker.get_latest_entity_values("area_de_interes"),None)
         
+        if (interes != None):
+            razones = OperarArchivo.cargarArchivo(".\\data\\porque.json")
+            if (positivo != None):
+                if razones[interes]["interesa"] == "si":
+                    message = "Me interesa porque " + razones[interes]["porque"]
+                else:
+                    message = "No me interesa ese tema porque " + razones[interes]["porque"]
+            elif (negativo != None):
+                if razones[interes]["interesa"] == "no":
+                    message = "No me interesa porque porque " + razones[interes]["porque"]
+                else:
+                    message = "Si me interesa ese tema porque " + razones[interes]["porque"]
+        
+        dispatcher.utter_message(text=str(message))
 
         return []

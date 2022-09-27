@@ -8,8 +8,10 @@ intents:
   - buen_humor
   - mal_humor
   - retar_al_bot
+  - presentacion
   - cuantos
   - que_o_cuales
+  - por_que
   - preguntas_carrera
   - estudio
   - otras_actividades
@@ -18,11 +20,26 @@ entities:
   - facultad
   - area_de_interes
   - tiempo
+  - nombre
 
 actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
   - action_responder_porque
+
+slots:
+  nombre:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: nombre
+
+  usuario_conocido:
+    type: bool
+    initial_value: false
+    mappings:
+    - type: from_entity
+      entity: nombre
 
 responses:
   utter_soy_un_bot:
@@ -30,6 +47,28 @@ responses:
 
   utter_saludar:
   - text: "Hola!"
+  - text: "Buenas!"
+  - text: "Holaa"
+  - text: "Hola"
+
+  utter_saludo_personalizado:
+  - text: "Hola {nombre}, que gusto volver a hablar con vos!"
+  - text: "Hola {nombre}, tanto tiempo!"
+  - text: "Hola {nombre}!"
+
+  utter_no_recuerdo_nombre:
+  - text: "Perdon, no lo recuerdo"
+
+  utter_preguntar_nombre:
+  - text: "Como te llamas?"
+  - text: "Como es tu nombre?"
+  - text: "Como te puedo llamar?"
+  - text: "Como te gustaria que te llame?"
+  - text: "Cual es tu nombre?"
+
+  utter_gusto_en_conocerte:
+  - text: "Hola {nombre}, gusto en conocerte!"
+  - text: "Hola {nombre}, que gusto conocerte!"
 
   utter_despedirse:
   - text: "Hasta luego!"
