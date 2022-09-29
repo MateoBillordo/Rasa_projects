@@ -26,8 +26,7 @@ actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
   - action_responder_porque
-  - action_set_tiempo_positivo
-  - action_set_tiempo_negativo
+  - action_set_rol_tiempo
 
 slots:
   nombre:
@@ -37,7 +36,7 @@ slots:
     - type: from_entity
       entity: nombre
 
-  pregunta_anterior:
+  pregunta:
     type: text
     mappings:
     - type: from_entity
@@ -45,17 +44,17 @@ slots:
     - type: from_entity
       entity: area_de_interes
 
-  tiempo_positivo:
+  tiempo:
     type: text
     mappings:
-    - type: custom
-      action: action_set_tiempo_positivo
+    - type: from_entity
+      entity: tiempo
 
-  tiempo_negativo:
+  rol_tiempo:
     type: text
     mappings:
     - type: custom
-      action: action_set_tiempo_negativo
+      action: action_set_rol_tiempo
 
 responses:
   utter_soy_un_bot:

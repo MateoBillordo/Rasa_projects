@@ -126,6 +126,8 @@ nlu:
     - cuantos [finales](facultad) [debes]{"entity":"tiempo","value":"presente"}? 
     - cuantas [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - cuantas [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
+    - cuantas son?
+    - cuantos son?
 
 - intent: que_o_cuales
   examples: |
@@ -138,6 +140,8 @@ nlu:
     - que [carrera](facultad) estudias?
     - que areas del desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
     - cuales areas del desarrollo de [software](area_de_interes) [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
+    - cuales?
+    - cuales son?
 
 - lookup: area_de_interes
   examples: |
@@ -159,8 +163,6 @@ nlu:
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
     - por que?
-    - por que [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
-    - por que [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
 
 # - intent: preguntas_carrera
 #   examples: |
