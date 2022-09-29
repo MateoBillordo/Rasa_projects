@@ -84,6 +84,7 @@ nlu:
     - me dicen Juan
     - llamame Martino
     - mi nombre es Joaquin
+    - soy Tomas
     - Agustin
 
 - lookup: nombre
@@ -125,7 +126,6 @@ nlu:
     - cuantos [finales](facultad) [debes]{"entity":"tiempo","value":"presente"}? 
     - cuantas [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - cuantas [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
-    
 
 - intent: que_o_cuales
   examples: |
@@ -158,6 +158,9 @@ nlu:
     - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el machine learning?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
+    - por que?
+    - por que [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
+    - por que [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
 
 # - intent: preguntas_carrera
 #   examples: |

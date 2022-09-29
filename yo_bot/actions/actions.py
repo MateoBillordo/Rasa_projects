@@ -7,15 +7,53 @@
 
 # This is a simple example for a custom action which utters "Hello World!"
 
-from email import message
-from re import T
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+from rasa_sdk.events import SlotSet
 from swiplserver import PrologMQI
 import os.path
 import json
 
+class ActionSetTiempoPositivo(Action):
+
+    def name(self) -> Text:
+        return "action_set_tiempo_positivo"
+    
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
+
+        ultimoMensaje = tracker.latest_message['entities']
+
+        if len(ultimoMensaje) > 0:
+            entidad = next((x for x in ultimoMensaje if x['entity'] == "tiempo"),None)
+            if entidad != None:
+                for key in entidad:
+                    if str(key) == "role" and str(entidad[key]) == "positivo":
+                        return [SlotSet("tiempo_positivo",str(entidad['value']))]
+            
+            return [SlotSet("tiempo_positivo",None)]
+        
+        return []
+
+class ActionSetTiempoNegativo(Action):
+
+    def name(self) -> Text:
+        return "action_set_tiempo_negativo"
+    
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
+
+        ultimoMensaje = tracker.latest_message['entities']
+        
+        if len(ultimoMensaje) > 0:
+            entidad = next((x for x in ultimoMensaje if x['entity'] == "tiempo"),None)
+            if entidad != None:
+                for key in entidad:
+                    if str(key) == "role" and str(entidad[key]) == "negativo":
+                        return [SlotSet("tiempo_negativo",str(entidad['value']))]
+
+            return [SlotSet("tiempo_negativo",None)]
+        
+        return []
 
 class OperarArchivo():
 
@@ -152,21 +190,45 @@ class ActionPorque(Action):
         message = "Perdon, no te entendi"
         positivo = next(tracker.get_latest_entity_values("tiempo","positivo"),None)
         negativo = next(tracker.get_latest_entity_values("tiempo","negativo"),None)
-        interes = next(tracker.get_latest_entity_values("area_de_interes"),None)
-        
+        interes = next(tracker.get_latest_entity_values("area_de_interes"),None)        
+
         if (interes != None):
             razones = OperarArchivo.cargarArchivo(".\\data\\porque.json")
             if (positivo != None):
-                if razones[interes]["interesa"] == "si":
-                    message = "Me interesa porque " + razones[interes]["porque"]
+                if razones["temas"][interes]["interesa"] == "si":
+                    message = "Me interesa porque " + razones["temas"][interes]["porque"]
                 else:
-                    message = "No me interesa ese tema porque " + razones[interes]["porque"]
+                    message = "No me interesa ese tema porque " + razones["temas"][interes]["porque"]
             elif (negativo != None):
-                if razones[interes]["interesa"] == "no":
-                    message = "No me interesa porque porque " + razones[interes]["porque"]
+                if razones["temas"][interes]["interesa"] == "no":
+                    message = "No me interesa porque porque " + razones["temas"][interes]["porque"]
                 else:
-                    message = "Si me interesa ese tema porque " + razones[interes]["porque"]
-        
+                    message = "Si me interesa ese tema porque " + razones["temas"][interes]["porque"]
+        else:
+            pregunta_anterior = tracker.get_slot("pregunta_anterior")
+            if (pregunta_anterior != None):
+
+                positivo = tracker.get_slot("tiempo_positivo")
+                negativo = tracker.get_slot("tiempo_negativo")
+                razones = OperarArchivo.cargarArchivo(".\\data\\porque.json")
+                
+                if (pregunta_anterior == "software"):
+                    
+                    if (positivo != None):
+                        message = ""
+                        for key in razones["temas"]:
+                            if razones["temas"][key]["interesa"] == "si":
+                                message += "Me interesa " + str(key) + " porque " + razones["temas"][key]["porque"] + ". "
+                    
+                    elif (negativo != None):
+                        message = ""
+                        for key in razones["temas"]:
+                            if razones["temas"][key]["interesa"] == "no":
+                                message += "No me interesa " + str(key) + " porque " + razones["temas"][key]["porque"] + ". "
+                
+                elif (pregunta_anterior == "carrera"):
+                    message = "Elegi esta carrera porque " + razones["carrera"]
+
         dispatcher.utter_message(text=str(message))
 
         return []

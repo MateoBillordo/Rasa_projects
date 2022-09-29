@@ -26,6 +26,8 @@ actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
   - action_responder_porque
+  - action_set_tiempo_positivo
+  - action_set_tiempo_negativo
 
 slots:
   nombre:
@@ -34,6 +36,26 @@ slots:
     mappings:
     - type: from_entity
       entity: nombre
+
+  pregunta_anterior:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: facultad
+    - type: from_entity
+      entity: area_de_interes
+
+  tiempo_positivo:
+    type: text
+    mappings:
+    - type: custom
+      action: action_set_tiempo_positivo
+
+  tiempo_negativo:
+    type: text
+    mappings:
+    - type: custom
+      action: action_set_tiempo_negativo
 
 responses:
   utter_soy_un_bot:
