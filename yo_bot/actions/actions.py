@@ -11,7 +11,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
-from sqlalchemy import false, true
 from swiplserver import PrologMQI
 import os.path
 import json
@@ -28,10 +27,8 @@ class ActionSetTiempo(Action):
         if len(ultimoMensaje) > 0:
             entidad = next((x for x in ultimoMensaje if x['entity'] == "tiempo"),None)
             if entidad != None:
-                tieneRol = false
                 for key in entidad:
                     if str(key) == "role":
-                        tieneRol = true
                         return[SlotSet("rol_tiempo",entidad[key])]
                 
             return[SlotSet("rol_tiempo",None)]
