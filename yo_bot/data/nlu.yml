@@ -139,7 +139,9 @@ nlu:
     - que [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     - que [carrera](facultad) estudias?
     - que areas del desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
+    - cuales areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
     - cuales areas del desarrollo de [software](area_de_interes) [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
+    - que areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
     - cuales?
     - cuales son?
 

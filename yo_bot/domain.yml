@@ -82,10 +82,15 @@ responses:
   - text: "Hola {nombre}, gusto en conocerte!"
   - text: "Hola {nombre}, que gusto conocerte!"
 
-  utter_despedirse:
+  utter_despedir:
   - text: "Hasta luego!"
   - text: "Nos vemos!"
   - text: "Chau"
+  
+  utter_despedida_personalizada:
+  - text: "Hasta luego {nombre}!"
+  - text: "Nos vemos {nombre}!"
+  - text: "Chau {nombre}!"
 
 session_config:
   session_expiration_time: 60

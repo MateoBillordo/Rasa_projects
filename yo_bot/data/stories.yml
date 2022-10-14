@@ -5,24 +5,43 @@ stories:
 - story: saludo
   steps:
   - intent: saludar
-  - checkpoint: comprobar_nombre
+  - checkpoint: comprobar_nombre_saludo
 
 - story: saludo usuario conocido
   steps:
-  - checkpoint: comprobar_nombre
+  - checkpoint: comprobar_nombre_saludo
   - slot_was_set:
     - nombre: not null
   - action: utter_saludo_personalizado
 
 - story: saludo usuario desconocido
   steps:
-  - checkpoint: comprobar_nombre
+  - checkpoint: comprobar_nombre_saludo
   - slot_was_set:
     - nombre: null
   - action: utter_saludar
   - action: utter_preguntar_nombre
   - intent: presentacion
   - action: utter_gusto_en_conocerte
+
+- story: despedida
+  steps:
+  - intent: despedirse
+  - checkpoint: comprobar_nombre_despedida
+
+- story: despedida usuario conocido
+  steps:
+  - checkpoint: comprobar_nombre_despedida
+  - slot_was_set:
+    - nombre: not null
+  - action: utter_despedida_personalizada
+
+- story: despedida usuario desconocido
+  steps:
+  - checkpoint: comprobar_nombre_despedida
+  - slot_was_set:
+    - nombre: null
+  - action: utter_despedir
 
 - story: cuantos_algo
   steps:

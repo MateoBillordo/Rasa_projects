@@ -2,7 +2,3 @@ version: "3.1"
 
 rules:
 
-- rule: despedida
-  steps:
-  - intent: despedirse
-  - action: utter_despedirse
