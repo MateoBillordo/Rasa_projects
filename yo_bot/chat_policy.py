@@ -1,4 +1,3 @@
-from multiprocessing.dummy import Manager
 from typing import List,Dict,Text, Optional, Any, Union, Tuple
 from rasa.core.policies.policy import Policy
 from rasa.shared.nlu.interpreter import NaturalLanguageInterpreter
@@ -83,9 +82,7 @@ class ChatPolicy(Policy):
 				print(result)
 				self.answered=True
 			else:
-				# recibir el intent
 				intent = str(tracker.latest_message.intent["name"])
-				# res = Manager.decision(intent)
 				
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
@@ -106,17 +103,6 @@ class ChatPolicy(Policy):
 					result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
 				else: 
 					pass
-     
-				# # Dependiendo de la accion el chatbot hace una cosa u otra
-				# if res is "preguntas" :
-				# 	result = confidence_scores_for(str("action_preguntas"), 1.0, domain)
-				# elif res is "horario":
-				# 	result = confidence_scores_for(str("action_horario"), 1.0, domain)
-				# elif res is "respuesta":
-				# 	result = confidence_scores_for(str("action_respuesta"), 1.0, domain)
-				# else: 
-				# 	result = confidence_scores_for(str("action_desconocido"), 1.0, domain)
-				# 	pass
 	
 
 				self.answered = True

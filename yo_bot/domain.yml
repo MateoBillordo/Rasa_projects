@@ -4,7 +4,7 @@ intents:
   - saludar
   - despedirse
   - afirmar
-  - denegar
+  - negar
   - buen_humor
   - mal_humor
   - retar_al_bot
@@ -12,21 +12,30 @@ intents:
   - cuantos
   - que_o_cuales
   - por_que
-  - preguntas_carrera
-  - estudio
-  - otras_actividades
+  # - preguntas_carrera
+  # - estudio
+  # - otras_actividades
+  - listos
+  - propuesta_fecha
+  - confirmacion_reu
 
 entities:
   - facultad
   - area_de_interes
   - tiempo
   - nombre
+  - dia
+  - hora
 
 actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
   - action_responder_porque
   - action_set_rol_tiempo
+  - action_chequea_fecha
+  - action_listo
+  - action_saludar
+  - action_agendar_contacto
 
 slots:
   nombre:
@@ -56,9 +65,21 @@ slots:
     - type: custom
       action: action_set_rol_tiempo
 
+  dia:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: dia
+  
+  hora:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: hora
+
 responses:
   utter_soy_un_bot:
-  - text: "Soy un bot."
+  - text: "Soy un bot, pero Mateo me dejo como su reemplazo momentaneamente :)"
 
   utter_saludar:
   - text: "Hola!"
@@ -91,6 +112,13 @@ responses:
   - text: "Hasta luego {nombre}!"
   - text: "Nos vemos {nombre}!"
   - text: "Chau {nombre}!"
+
+  utter_preguntar_humor:
+  - text: "Como estas?"
+  - text: "Como te va?"
+  - text: "Como te sentis?"
+  - text: "Como andas?"
+
 
 session_config:
   session_expiration_time: 60
