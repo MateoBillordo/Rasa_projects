@@ -45,3 +45,13 @@ stories:
   steps:
   - intent: por_que
   - action: action_responder_porque
+
+- story: grupal_listos
+  steps:
+  - intent: listos
+  - action: action_listo
+
+- story: grupal_propuesta_fecha
+  steps:
+  - intent: propuesta_fecha
+  - action: action_chequea_fecha
