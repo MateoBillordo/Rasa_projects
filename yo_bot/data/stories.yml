@@ -2,27 +2,10 @@ version: "3.1"
 
 stories:
 
-- story: saludo
+- story: presentacion
   steps:
-  - intent: saludar
-  - checkpoint: comprobar_nombre_saludo
-
-- story: saludo usuario conocido
-  steps:
-  - checkpoint: comprobar_nombre_saludo
-  - slot_was_set:
-    - nombre: not null
-  - action: utter_saludo_personalizado
-
-- story: saludo usuario desconocido
-  steps:
-  - checkpoint: comprobar_nombre_saludo
-  - slot_was_set:
-    - nombre: null
-  - action: utter_saludar
-  - action: utter_preguntar_nombre
   - intent: presentacion
-  - action: utter_gusto_en_conocerte
+  - action: action_agendar_contacto
 
 - story: despedida
   steps:
@@ -43,6 +26,21 @@ stories:
     - nombre: null
   - action: utter_despedir
 
+- story: retar al bot
+  steps:
+  - intent: retar_al_bot
+  - action: utter_soy_un_bot
+
+- story: buen_humor
+  steps:
+  - intent: buen_humor
+  - action: utter_me_alegra
+
+- story: mal_humor
+  steps:
+  - intent: mal_humor
+  - action: utter_animar
+
 - story: cuantos_algo
   steps:
   - intent: cuantos
@@ -57,3 +55,13 @@ stories:
   steps:
   - intent: por_que
   - action: action_responder_porque
+
+- story: grupal_listos
+  steps:
+  - intent: listos
+  - action: action_listo
+
+- story: grupal_propuesta_fecha
+  steps:
+  - intent: propuesta_fecha
+  - action: action_chequea_fecha

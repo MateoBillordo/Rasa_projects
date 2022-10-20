@@ -130,57 +130,38 @@ areasDeInteres(Lista):-findall(X,interesa(X),Lista).
 
 areasDeNoInteres(Lista):-findall(X,no_interesa(X),Lista).
 
-%IMPRESION POR PANTALLA
+%Horarios
 
-%Imprime el primer elemento de la lista de correlatividades
-primero_lista([Cabeza|_]):-
-    materia(Cabeza,Nom,_,_,_),
-    write(Nom).
+%Horarios no disponibles
+horarios(lunes,[["08:00","12:00"],["15:00","17:00"],["18:00","19:30"]]).
+horarios(martes,[["10:00","12:00"],["13:00","18:00"]]).
+horarios(miercoles,[["09:00","12:00"],["13:00","16:00"],["18:00","19:30"]]).
+horarios(jueves,[["14:00","17:00"]]).
+horarios(viernes,[["16:00","21:00"]]).
+horarios(sabado,[["10:30","12:00"],["16:00","21:00"]]).
+horarios(domingo,[["12:00","13:00"]]).
 
-%Imprime el resto de la lista de correlatividades
-imprimir_lista([]).
-imprimir_lista([Cabeza|Cola]):-
-    materia(Cabeza,N,_,_,_),
-    length(Cola,L),
-    (L>0,write(', ');L=0,write(' y ')),
-    write(N),
-    imprimir_lista(Cola).
+dia_y_hora_random(X , Y) :-
+    random_member(Dia, [lunes,martes,miercoles,jueves,viernes,sabado,domingo]),
+    horarios(Dia, Horarios),
+    random_member(Hora, Horarios),
+    last(Hora, HoraFin),
+    random_member(Adicion, ["00", "30", "45"]),
+    sub_atom(HoraFin, 0, 3, _, HoraFin2),
+    atom_concat(HoraFin2, Adicion, Hora3),
+    X = Dia,
+    Y = Hora3.
 
-%Imprime las materias con solo una correlativa
-materias_con_una_correlativa:-
-    una_correlativa(X),materia(X,Nom,_,_,Y),
-    write('Para hacer '),write(Nom),write(' solo necesitas '),primero_lista(Y),
-    nl,fail;nl.
 
-%Imprime las materias de un curso dado
-materias_de(A):-write('Materias del curso: '),writeln(A),
-    materia(_,X,A,_,_),write('*'),writeln(X),
-    fail;nl.
+horario_entre(Hora,Horario):-
+    nth0(0,Horario,HoraInicio),
+    nth0(1,Horario,HoraFin),
+    write(HoraInicio),
+    write(HoraFin),
+    Hora @>= HoraInicio,
+    Hora @=< HoraFin.
 
-%Imprime el plan de estudios completo
-plan_is:-writeln('Plan de Ingenieria de Sistemas'),
-    materia(Cod,Nom,Cur,Cua,Correlativas),
-    write(' Curso: '),write(Cur),
-    write(' Cua: '),write(Cua),
-    write(' Nom:'),write(Nom),
-    (
-        (sin_correlativas(Cod),write(' Sin correlativas'));
-        (al_menos_una_correlativa(Cod),write(' Correlativas: '),
-        Correlativas=[_|X],primero_lista(Correlativas),imprimir_lista(X))
-                   ),
-    nl,nl,false;nl.
 
-%Imprime todas las materias cursadas
-materias_cursadas:-cursada_aprobada(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
-
-%Imprime todas las materias aprobadas
-materias_aprobadas:-final_aprobado(X),materia(X,Nom,_,_,_),writeln(-Nom),fail;nl.
-
-%Imprime los finales adeudados de las materias cursadas
-finales_faltantes_hasta_ahora:-materia(X,Nom,_,_,_),final_no_aprobado(X),cursada_aprobada(X),writeln(-Nom),fail;nl.
-
-%Imprime las cursadas adeudadas
-cursadas_faltantes:-materia(X,Nom,_,_,_),cursada_no_aprobada(X),writeln(-Nom),fail;nl.
-
-%Imprime los finales adeudados
-finales_faltantes:-materia(X,Nom,_,_,_),final_no_aprobado(X),writeln(-Nom),fail;nl.
+horario_valido(Dia,Hora):-
+    horarios(Dia,Horarios),
+    forall(member(Horario,Horarios),horario_entre(Hora,Horario)).

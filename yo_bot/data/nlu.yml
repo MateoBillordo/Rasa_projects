@@ -28,28 +28,90 @@ nlu:
   examples: |
     - si
     - s
+    - yes
     - totalmente
     - por supuesto
     - dale
     - listo
     - joya
     - claro
+    - sisi
+    - obvio
+    - mas vale
+    - suena bien
+    - correcto
+    - dale sisi
+    - genial
+    - okey dale
+    - re si
+    - claro que si
+    - si gracias
+    - mucho
+    - bastante
+    - si puedo
+    - si podria
+    - yo podria
+    - dale puedo
+    - okaa, yo puedo
+    - si, yo puedo
+    - yo puedo
+    - puedo
+    - sisi, puedo
+    - estoy
+    - si, en ese horario puedo
+    - si, esa hora me viene joya
+    - si, en esa hora estoy libre
+    - si, ese horario esta disponible
+    - si, puedo
+    - si, estoy
+    - si, dalee
+    - si, me copa
+    - si, en ese horario voy a poder
+    - si, me re va ese horario
+    - dale si, me queda re bien ese horario
+    - sisi, genial ese horario
 
-- intent: denegar
+- intent: negar
   examples: |
     - no
+    - re no
     - n
     - nunca
     - jamas
     - no lo creo
-    - no lo creo
+    - no hay chance
     - no creo
     - ni ahi
+    - la verdad que no
+    - para nada
+    - perdon pero no
+    - no, mejor no
+    - no quiero
+    - no tengo ganas
+    - no por ahora
+    - no gracias
+    - no creo que pueda
+    - no puedo
+    - no me coincide
+    - no podria
+    - yo no puedo
+    - no puedo
+    - no, yo no puedo
+    - no, no puedo
+    - no, en ese horario no puedo
+    - no, en ese horario no estoy
+    - no, en ese horario no me puedo conectar
+    - no, en ese horario no estoy disponible
+    - no, no voy a estar
+    - nop, no voy a poder
+    - mm no, en ese horario no puedo
+    - no creo estar para ese horario
+    - no, imposible en ese horario
+    - perdon pero no voy a poder
 
 - intent: buen_humor
   examples: |
     - perfecto
-    - genial
     - todo joya
     - estoy joya
     - me siento muy bien
@@ -165,6 +227,76 @@ nlu:
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
     - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
     - por que?
+
+- intent: listos
+  examples: |
+    - okey, tenemos que organizar una fecha. Estan listos!?
+    - tenemos que organizarnos. Estan listos?
+    - estan listos?
+    - pueden?
+    - listos?
+    - estan?
+    - ya estan?
+    - ya estan disponibles?
+    - ya pueden?
+    - estan o todavia no?
+    - podemos comenzar?
+    - podriamos empezar?
+    - estan de acuerdo en iniciar?
+    - se encuentran preparados para comenzar?
+
+- intent: propuesta_fecha
+  examples: |
+    - les parece el [lunes](dia) a las [17:00](hora)?
+    - pueden el martes a las [18:00](hora)?
+    - el miercoles a las [19:30](hora)?
+    - que tal el jueves a las [20:40](hora)?
+    - no pueden el lunes a las [21:00](hora)?
+    - les parece el lunes a las [19](hora)?
+    - pueden lunes a las [17](hora)?
+    - el miercoles a las [12](hora)?
+    - no, no estoy, que tal el jueves a las [20:40](hora)?
+    - les parece el lunes a las [11](hora)?
+    - les va el martes a las [10:30](hora)?
+    - no, que tal el miercoles a las [12:30](hora)?
+    - se copan para el Martes a las [14:00](hora)
+    - el Miercoles quieren a las [20:00](hora)? 
+    - si pueden, el Viernes a las [12:00](hora)
+    - el Sabado a las [09:00](hora) les copa?
+    - les sirve el miercoles a las [20:00](hora)?
+    - podran el jueves a las [12:00](hora)?
+    - les quedara bien el viernes a las [14:00](hora)?
+    - no se si les parece bien el sabado a las [09:00](hora)?
+    - genial, pueden el lunes a las [08:00](hora)?
+    - genial, quedamos para el jueves a las [20:00](hora)
+    - excelente, quedamos para el viernes a las [12:00](hora)
+
+- lookup: dia
+  examples: |
+    - lunes
+    - martes
+    - miercoles
+    - jueves
+    - viernes
+    - sabado
+    - domingo
+
+- regex: hora
+  examples: |
+    - (([0-1][0-9])||(2[0-3]))\:[0-5][0-9]
+    - ([0-1][0-9])||(2[0-3])
+
+- intent: confirmacion_reu
+  examples: |
+    - bueno, entonces si todos pueden dejamos la reunion para el lunes a las [19](hora)
+    - entonces quedamos en el martes a las [20:30](hora)
+
+
+
+
+
+
+
 
 # - intent: preguntas_carrera
 #   examples: |

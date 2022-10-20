@@ -4,7 +4,7 @@ intents:
   - saludar
   - despedirse
   - afirmar
-  - denegar
+  - negar
   - buen_humor
   - mal_humor
   - retar_al_bot
@@ -12,21 +12,31 @@ intents:
   - cuantos
   - que_o_cuales
   - por_que
-  - preguntas_carrera
-  - estudio
-  - otras_actividades
+  # - preguntas_carrera
+  # - estudio
+  # - otras_actividades
+  - listos
+  - propuesta_fecha
+  - confirmacion_reu
 
 entities:
   - facultad
   - area_de_interes
   - tiempo
   - nombre
+  - dia
+  - hora
 
 actions:
   - action_responder_cuantos
   - action_responder_que_o_cuales
   - action_responder_porque
   - action_set_rol_tiempo
+  - action_chequea_fecha
+  - action_listo
+  - action_saludar
+  - action_agendar_contacto
+  - action_preguntar_estado_de_animo
 
 slots:
   nombre:
@@ -56,31 +66,21 @@ slots:
     - type: custom
       action: action_set_rol_tiempo
 
+  dia:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: dia
+  
+  hora:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: hora
+
 responses:
   utter_soy_un_bot:
-  - text: "Soy un bot."
-
-  utter_saludar:
-  - text: "Hola!"
-  - text: "Buenas!"
-  - text: "Holaa"
-  - text: "Hola"
-
-  utter_saludo_personalizado:
-  - text: "Hola {nombre}, que gusto volver a hablar con vos!"
-  - text: "Hola {nombre}, tanto tiempo!"
-  - text: "Hola {nombre}!"
-
-  utter_preguntar_nombre:
-  - text: "Como te llamas?"
-  - text: "Como es tu nombre?"
-  - text: "Como te puedo llamar?"
-  - text: "Como te gustaria que te llame?"
-  - text: "Cual es tu nombre?"
-
-  utter_gusto_en_conocerte:
-  - text: "Hola {nombre}, gusto en conocerte!"
-  - text: "Hola {nombre}, que gusto conocerte!"
+  - text: "Soy un bot, pero Mateo me dejo como su reemplazo momentaneamente :)"
 
   utter_despedir:
   - text: "Hasta luego!"
@@ -91,6 +91,20 @@ responses:
   - text: "Hasta luego {nombre}!"
   - text: "Nos vemos {nombre}!"
   - text: "Chau {nombre}!"
+
+  utter_me_alegra:
+  - text: "Me alegra que estes bien!"
+  - text: "Me alegro de que andes bien :)"
+  - text: "Que bueno que te sientas bien!"
+  - text: "Que lindo que estes bien :)"
+  - text: "Me alegro de que estes teniendo un buen dia :)"
+  - text: "Me alegro!"
+
+  utter_animar:
+  - text: "Que mal :(. Espero que tu dia mejore!"
+  - text: "Animo que siempre es buen momento para sonreir :)"
+  - text: "Te entiendo, a veces tambien me siento asi. Pero ya va a pasar, te lo prometo :)"
+  - text: "Animo, todo va a estar bien :)"
 
 session_config:
   session_expiration_time: 60
