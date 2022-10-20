@@ -6,3 +6,8 @@ rules:
   steps:
   - intent: saludar
   - action: action_saludar
+
+- rule: respuesta por defecto
+  steps:
+  - intent: nlu_fallback
+  - action: utter_default
