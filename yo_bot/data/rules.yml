@@ -3,7 +3,6 @@ version: "3.1"
 rules:
 
 - rule: saludo
-  conversation_start: true
   steps:
   - intent: saludar
   - action: action_saludar

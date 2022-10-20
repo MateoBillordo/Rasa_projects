@@ -39,7 +39,7 @@ class ActionSetTiempo(Action):
 class OperarArchivo():
 
     @staticmethod
-    def guardar(AGuardar,ruta):
+    def guardarArchivo(AGuardar,ruta):
         with open(ruta,"w") as archivo_descarga:
             json.dump(AGuardar, archivo_descarga, indent=4)
         archivo_descarga.close()
@@ -65,7 +65,7 @@ class ConsultarAProlog():
                 return retorno
 
     @staticmethod
-    def consulta(motivo,tiempo,rol_tiempo) -> List[Text]:
+    def consultaPredefinida(motivo,tiempo,rol_tiempo) -> List[Text]:
         result = []
         with PrologMQI() as mqi:
             with mqi.create_thread() as prolog_thread:
@@ -117,7 +117,7 @@ class ActionResponderCuantos(Action):
             else:
                 message = "Todavia no investigue sobre las optativas disponibles"
         elif motivo != None:
-            result = ConsultarAProlog.consulta(motivo,tiempo,rol_tiempo)
+            result = ConsultarAProlog.consultaPredefinida(motivo,tiempo,rol_tiempo)
         tamanio = len(result)
         
         if tamanio > 0:
@@ -150,7 +150,7 @@ class ActionResponderQueOCuales(Action):
             else:
                 message = "Todavia no investigue sobre las optativas disponibles"
         elif motivo != None:
-            result = ConsultarAProlog.consulta(motivo,tiempo,rol_tiempo)
+            result = ConsultarAProlog.consultaPredefinida(motivo,tiempo,rol_tiempo)
         
             tamanio = len(result)
 
@@ -232,29 +232,29 @@ class ActionChequeaFecha(Action):
         if consulta:
             ran = randint(0,3)
             if ran == 0:
-                dispatcher.utter_message(f"si, en ese horario estoy disponible")
+                dispatcher.utter_message(f"Si, en ese horario estoy disponible")
             elif ran == 1:
-                dispatcher.utter_message(f"si, ese horario lo tengo libre")
+                dispatcher.utter_message(f"Si, ese horario lo tengo libre")
             elif ran == 2:
-                dispatcher.utter_message(f"si, estoy libre en ese horario")
+                dispatcher.utter_message(f"Si, estoy libre en ese horario")
             else:
-                dispatcher.utter_message(f"si, en ese horario puedo")
+                dispatcher.utter_message(f"Si, en ese horario puedo")
                 
         else:
             consulta2 = ConsultarAProlog.consulta(f'dia_y_hora_random(X,Y).')
             ran = randint(0,3)
             if ran == 0:
-                dispatcher.utter_message(f"no, en ese horario no estoy disponible")
+                dispatcher.utter_message(f"No, en ese horario no estoy disponible")
                 dispatcher.utter_message(f"que tal el {consulta2[0]['X']} a las {consulta2[0]['Y']}")
             elif ran == 1:
-                dispatcher.utter_message(f"no, no tengo ese horario disponible")
-                dispatcher.utter_message(f"les parece el {consulta2[0]['X']} a las {consulta2[0]['Y']}?")
+                dispatcher.utter_message(f"No, no tengo ese horario disponible")
+                dispatcher.utter_message(f"Les parece el {consulta2[0]['X']} a las {consulta2[0]['Y']}?")
             elif ran == 2:
-                dispatcher.utter_message(f"no, en ese horario no puedo")
-                dispatcher.utter_message(f"que les parece el {consulta2[0]['X']} a las {consulta2[0]['Y']}?")
+                dispatcher.utter_message(f"No, en ese horario no puedo")
+                dispatcher.utter_message(f"Que les parece el {consulta2[0]['X']} a las {consulta2[0]['Y']}?")
             else:
-                dispatcher.utter_message(f"no, ese horario no lo tengo disponible")
-                dispatcher.utter_message(f"y el {consulta2[0]['X']} a las {consulta2[0]['Y']}")
+                dispatcher.utter_message(f"No, ese horario no lo tengo disponible")
+                dispatcher.utter_message(f"Y el {consulta2[0]['X']} a las {consulta2[0]['Y']}?")
         
         return []
 
@@ -269,19 +269,19 @@ class ActionListo(Action):
         
         ran = randint(0,6)
         if ran == 0:
-            dispatcher.utter_message(f"dale")
+            dispatcher.utter_message(f"Dale")
         elif ran == 1:
-            dispatcher.utter_message(f"genial dale")
+            dispatcher.utter_message(f"Por mi si")
         elif ran == 2:
-            dispatcher.utter_message(f"okay dale")
+            dispatcher.utter_message(f"Yo estoy")
         elif ran == 3:
-            dispatcher.utter_message(f"dale dale")
+            dispatcher.utter_message(f"Dale dale")
         elif ran == 4:
-            dispatcher.utter_message(f"sisi")
+            dispatcher.utter_message(f"Sisi")
         elif ran == 5:
-            dispatcher.utter_message(f"sip")
+            dispatcher.utter_message(f"Sip")
         else:
-            dispatcher.utter_message(f"okok, yo puedo")
+            dispatcher.utter_message(f"Estoy")
         return []
 
 class ActionSaludar(Action):
@@ -297,8 +297,8 @@ class ActionSaludar(Action):
 
         agenda = OperarArchivo().cargarArchivo(".\\data\\agenda.json")
 
-        if id_usuario in agenda:
-            nombre = agenda[id_usuario]["nombre"]
+        if str(id_usuario) in agenda: # si el usuario ya esta en la agenda
+            nombre = agenda[str(id_usuario)]["nombre"]
             nro_random = randint(0, 2)
             if nro_random == 0:
                 dispatcher.utter_message(f"Hola {nombre}, que gusto volver a hablar con vos!")
@@ -306,8 +306,9 @@ class ActionSaludar(Action):
                 dispatcher.utter_message(f"Hola {nombre}, tanto tiempo!")
             else:
                 dispatcher.utter_message(f"Hola {nombre}!")
-
-        else:
+            return [SlotSet("nombre",str(nombre))]
+        
+        else: # si el usuario no esta en la agenda
             nro_random = randint(0, 2)
             if nro_random == 0:
                 dispatcher.utter_message(f"Hola, quien sos? No te tengo agendado")
@@ -316,7 +317,7 @@ class ActionSaludar(Action):
             else:
                 dispatcher.utter_message("Hola, no te tengo en mi agenda de contactos, como te llamas?")
         
-        return []
+        return [SlotSet("nombre",None)]
 
 class ActionAgendarContacto(Action):
 
@@ -331,17 +332,26 @@ class ActionAgendarContacto(Action):
         username = mensaje["metadata"]["message"]["from"]["username"]
 
         agenda = OperarArchivo().cargarArchivo(".\\data\\agenda.json")
-        agenda[id_usuario] = {"nombre": nombre, "apellido": apellido_usuario, "username": username}
-        OperarArchivo().guardarArchivo(agenda,".\\data\\agenda.json")
         
-        nro_random = randint(0, 3)
-        if nro_random == 0:
-            dispatcher.utter_message(f"Genial, me alegro de conocerte {nombre}!")
-        elif nro_random == 1:
-            dispatcher.utter_message(f"Me alegro de conocerte {nombre}!")
-        elif nro_random == 2:
-            dispatcher.utter_message(f"Hola {nombre}, que gusto conocerte!")
-        else:
-            dispatcher.utter_message(f"Que gusto conocerte {nombre}!")
+        if str(id_usuario) in agenda: # si el usuario ya esta en la agenda
+            nombre_actual = agenda[str(id_usuario)]["nombre"]
+            if str(nombre).lower() != str(nombre_actual).lower(): # si el nombre que ingreso el usuario es distinto al que ya tenia
+                dispatcher.utter_message(f"Ya te tenia agendado como {nombre_actual}, pero te voy a cambiar el nombre por {nombre}")
+            else:
+                dispatcher.utter_message("Lo se, es un lindo nombre :)")
+        
+        else: # si el usuario no esta en la agenda
+            nro_random = randint(0, 3)
+            if nro_random == 0:
+                dispatcher.utter_message(f"Genial, me alegro de conocerte {nombre}!")
+            elif nro_random == 1:
+                dispatcher.utter_message(f"Me alegro de conocerte {nombre}!")
+            elif nro_random == 2:
+                dispatcher.utter_message(f"Hola {nombre}, que gusto conocerte!")
+            else:
+                dispatcher.utter_message(f"Que gusto conocerte {nombre}!")
+        
+        agenda[str(id_usuario)] = {"nombre": nombre, "apellido": apellido_usuario, "username": username}
+        OperarArchivo().guardarArchivo(agenda,".\\data\\agenda.json")
 
         return []
