@@ -36,6 +36,7 @@ actions:
   - action_listo
   - action_saludar
   - action_agendar_contacto
+  - action_preguntar_estado_de_animo
 
 slots:
   nombre:
@@ -91,12 +92,19 @@ responses:
   - text: "Nos vemos {nombre}!"
   - text: "Chau {nombre}!"
 
-  utter_preguntar_humor:
-  - text: "Como estas?"
-  - text: "Como te va?"
-  - text: "Como te sentis?"
-  - text: "Como andas?"
+  utter_me_alegra:
+  - text: "Me alegra que estes bien!"
+  - text: "Me alegro de que andes bien :)"
+  - text: "Que bueno que te sientas bien!"
+  - text: "Que lindo que estes bien :)"
+  - text: "Me alegro de que estes teniendo un buen dia :)"
+  - text: "Me alegro!"
 
+  utter_animar:
+  - text: "Que mal :(. Espero que tu dia mejore!"
+  - text: "Animo que siempre es buen momento para sonreir :)"
+  - text: "Te entiendo, a veces tambien me siento asi. Pero ya va a pasar, te lo prometo :)"
+  - text: "Animo, todo va a estar bien :)"
 
 session_config:
   session_expiration_time: 60

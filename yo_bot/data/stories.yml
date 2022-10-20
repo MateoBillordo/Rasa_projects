@@ -31,6 +31,16 @@ stories:
   - intent: retar_al_bot
   - action: utter_soy_un_bot
 
+- story: buen_humor
+  steps:
+  - intent: buen_humor
+  - action: utter_me_alegra
+
+- story: mal_humor
+  steps:
+  - intent: mal_humor
+  - action: utter_animar
+
 - story: cuantos_algo
   steps:
   - intent: cuantos

@@ -284,6 +284,31 @@ class ActionListo(Action):
             dispatcher.utter_message(f"Estoy")
         return []
 
+class ActionPreguntarEstadoDeAnimo(Action):
+
+    def name(self):
+        return "action_preguntar_estado_de_animo"
+    
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        ran = randint(0,5)
+        if ran == 0:
+            dispatcher.utter_message("Como estas?")
+        elif ran == 1:
+            dispatcher.utter_message("Como te va?")
+        elif ran == 2:
+            dispatcher.utter_message("Como andas?")
+        elif ran == 3:
+            dispatcher.utter_message("Como va todo?")
+        elif ran == 4:
+            dispatcher.utter_message("Como va?")
+        else:
+            dispatcher.utter_message("Como te trata la vida?")
+
+        return []
+
 class ActionSaludar(Action):
 
     def name(self):
@@ -306,6 +331,9 @@ class ActionSaludar(Action):
                 dispatcher.utter_message(f"Hola {nombre}, tanto tiempo!")
             else:
                 dispatcher.utter_message(f"Hola {nombre}!")
+            
+            ActionPreguntarEstadoDeAnimo().run(dispatcher, tracker, domain)
+
             return [SlotSet("nombre",str(nombre))]
         
         else: # si el usuario no esta en la agenda
@@ -350,7 +378,9 @@ class ActionAgendarContacto(Action):
                 dispatcher.utter_message(f"Hola {nombre}, que gusto conocerte!")
             else:
                 dispatcher.utter_message(f"Que gusto conocerte {nombre}!")
-        
+
+            ActionPreguntarEstadoDeAnimo().run(dispatcher, tracker, domain)
+
         agenda[str(id_usuario)] = {"nombre": nombre, "apellido": apellido_usuario, "username": username}
         OperarArchivo().guardarArchivo(agenda,".\\data\\agenda.json")
 
