@@ -33,8 +33,8 @@ class ActionSetRolTiempo(Action):
                 for key in entidad:
                     if str(key) == "role":
                         return[SlotSet("rol_tiempo",entidad[key])]
-                
-            return[SlotSet("rol_tiempo",None)]
+
+                return[SlotSet("rol_tiempo",None)]
 
         return []
 
@@ -50,6 +50,7 @@ class ActionSetNombre(Action):
         if len(ultimoMensaje) > 0:
             entidad = next((x for x in ultimoMensaje if x['entity'] == "nombre"),None)
             if entidad != None:
+                nombre = entidad['value']
                 return[SlotSet("nombre",str(nombre))]
 
         return []
@@ -100,7 +101,7 @@ class ConsultarAProlog():
                     if str(tiempo) == "pasado":
                         prolog_thread.query_async("materiasAprobadas(X)",find_all=False)
                     elif str(tiempo) == "presente":
-                        prolog_thread.query_async("finalesFaltantes(X)",find_all=False)
+                            prolog_thread.query_async("finalesAdeudados(X)",find_all=False)
                 
                 elif str(motivo) == "software":
                     if str(rol_tiempo) == "positivo":
@@ -123,7 +124,7 @@ class ActionResponderCuantos(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi"
+        message = "Perdon, no te entendi (cuantos)"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
@@ -154,7 +155,7 @@ class ActionResponderQueOCuales(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi"
+        message = "Perdon, no te entendi (que o cuales)"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
