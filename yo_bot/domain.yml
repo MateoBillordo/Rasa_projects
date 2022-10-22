@@ -33,11 +33,10 @@ actions:
   - action_responder_porque
   - action_set_rol_tiempo
   - action_chequea_fecha
-  - action_listo
+  - action_listos
   - action_saludar
   - action_agendar_contacto
   - action_responder_mal_humor
-  - action_set_nombre
 
 slots:
 

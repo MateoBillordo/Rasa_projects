@@ -261,7 +261,7 @@ class ActionChequeaFecha(Action):
 class ActionListo(Action):
     
     def name (self) -> Text:
-        return "action_listo"
+        return "action_listos"
 
     def run( self, dispatcher: CollectingDispatcher,
             tracker: Tracker,

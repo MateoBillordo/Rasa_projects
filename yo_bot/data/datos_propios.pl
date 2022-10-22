@@ -158,8 +158,7 @@ horario_entre(Hora,Horario):-
     nth0(1,Horario,HoraFin),
     write(HoraInicio),
     write(HoraFin),
-    Hora @>= HoraInicio,
-    Hora @=< HoraFin.
+    (Hora @>= HoraFin -> true; Hora @=< HoraInicio -> true; false).
 
 
 horario_valido(Dia,Hora):-
