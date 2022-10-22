@@ -25,6 +25,7 @@ from rasa.engine.storage.resource import Resource
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.storage import ModelStorage
 from rasa.engine.graph import ExecutionContext
+
 # from classes import Manager
 
 # temporary constants to support back compatibility
@@ -35,7 +36,7 @@ OLD_DEFAULT_MAX_HISTORY = 5
     DefaultV1Recipe.ComponentType.POLICY_WITHOUT_END_TO_END_SUPPORT, is_trainable=False
 )
 class ChatPolicy(Policy):
-	def _init_(
+	def __init__(
 			self,
         	config: Dict[Text, Any],
         	model_storage: ModelStorage,
@@ -46,7 +47,7 @@ class ChatPolicy(Policy):
 		) -> None:
 
 		config[POLICY_MAX_HISTORY] = None
-		super()._init_(config, model_storage, resource, execution_context, featurizer)
+		super().__init__(config, model_storage, resource, execution_context, featurizer)
 		self.answered = False
 		self.priority = 1
 		self.eventos = []
@@ -75,18 +76,22 @@ class ChatPolicy(Policy):
 			**kwargs: Any,
 	) -> PolicyPrediction:
 		print("Especulando")
+		result = self._default_predictions(domain)
 		intent = str(tracker.latest_message.intent["name"])
 		print(intent)
-		result = self._default_predictions(domain)
 		if not self.answered:
 			chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
 			print(chat)
 			if chat=="private":
 				result = confidence_scores_for(str("action_listen"), 1.0, domain)
 				print(result)
-				self.answered = True
+				self.answered=True
 			else:
 				self.eventos.append(intent)
+				# recibir el intent
+				intent = str(tracker.latest_message.intent["name"])
+				# res = Manager.decision(intent)
+				
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
 					self.answered = True
@@ -96,18 +101,16 @@ class ChatPolicy(Policy):
 					if self.eventos[7] == "negar":
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
 						self.answered = True
-
 					elif self.eventos.count("propuesta_fecha") >= 2:
 						pass
 					else:
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
 						self.answered = True
-
+      
 				# elif intent == "confirmacion_reu":
 				# 	result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
-				else:
+				else: 
 					pass
-
 
 		else:
 			self.answered = False

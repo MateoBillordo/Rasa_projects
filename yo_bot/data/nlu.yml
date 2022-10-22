@@ -172,12 +172,12 @@ nlu:
 - intent: presentacion
   examples: |
     - me llamo [Mateo](nombre)
-    - me dicen Juan
-    - llamame Martino
-    - mi nombre es Joaquin
-    - soy Tomas
-    - Agustin
-    - decime Juan Ignacio
+    - me dicen [Juan](nombre)
+    - llamame [Martino](nombre)
+    - mi nombre es [Joaquin](nombre)
+    - soy [Tomas](nombre)
+    - [Agustin](nombre)
+    - decime Juan [Ignacio](nombre)
 
 - lookup: nombre
   examples: |
@@ -278,28 +278,28 @@ nlu:
 - intent: propuesta_fecha
   examples: |
     - les parece el [lunes](dia) a las [17:00](hora)?
-    - pueden el martes a las [18:00](hora)?
-    - el miercoles a las [19:30](hora)?
-    - que tal el jueves a las [20:40](hora)?
-    - no pueden el lunes a las [21:00](hora)?
-    - les parece el lunes a las [19](hora)?
-    - pueden lunes a las [17](hora)?
-    - el miercoles a las [12](hora)?
-    - no, no estoy, que tal el jueves a las [20:40](hora)?
-    - les parece el lunes a las [11](hora)?
-    - les va el martes a las [10:30](hora)?
-    - no, que tal el miercoles a las [12:30](hora)?
-    - se copan para el Martes a las [14:00](hora)
-    - el Miercoles quieren a las [20:00](hora)? 
-    - si pueden, el Viernes a las [12:00](hora)
-    - el Sabado a las [09:00](hora) les copa?
-    - les sirve el miercoles a las [20:00](hora)?
-    - podran el jueves a las [12:00](hora)?
-    - les quedara bien el viernes a las [14:00](hora)?
-    - no se si les parece bien el sabado a las [09:00](hora)?
-    - genial, pueden el lunes a las [08:00](hora)?
-    - genial, quedamos para el jueves a las [20:00](hora)
-    - excelente, quedamos para el viernes a las [12:00](hora)
+    - pueden el [martes](dia) a las [18:00](hora)?
+    - el [miercoles](dia) a las [19:30](hora)?
+    - que tal el [jueves](dia) a las [20:40](hora)?
+    - no pueden el [lunes](dia) a las [21:00](hora)?
+    - les parece el [lunes](dia) a las [19](hora)?
+    - pueden [lunes](dia) a las [17](hora)?
+    - el [miercoles](dia) a las [12](hora)?
+    - no, no estoy, que tal el [jueves](dia) a las [20:40](hora)?
+    - les parece el [lunes](dia) a las [11](hora)?
+    - les va el [martes](dia) a las [10:30](hora)?
+    - no, que tal el [miercoles](dia) a las [12:30](hora)?
+    - se copan para el [Martes](dia) a las [14:00](hora)
+    - el [Miercoles](dia) quieren a las [20:00](hora)? 
+    - si pueden, el [Viernes](dia) a las [12:00](hora)
+    - el [Sabado](dia) a las [09:00](hora) les copa?
+    - les sirve el [miercoles](dia) a las [20:00](hora)?
+    - podran el [jueves](dia) a las [12:00](hora)?
+    - les quedara bien el [viernes](dia) a las [14:00](hora)?
+    - no se si les parece bien el [sabado](dia) a las [09:00](hora)?
+    - genial, pueden el [lunes](dia) a las [08:00](hora)?
+    - genial, quedamos para el [jueves](dia) a las [20:00](hora)
+    - excelente, quedamos para el [viernes](dia) a las [12:00](hora)
 
 - lookup: dia
   examples: |
@@ -317,5 +317,5 @@ nlu:
 
 - intent: confirmacion_reu
   examples: |
-    - bueno, entonces si todos pueden dejamos la reunion para el lunes a las [19](hora)
-    - entonces quedamos en el martes a las [20:30](hora)
+    - bueno, entonces si todos pueden dejamos la reunion para el [lunes](dia) a las [19](hora)
+    - entonces quedamos en el [martes](dia) a las [20:30](hora)
