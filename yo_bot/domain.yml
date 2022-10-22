@@ -40,11 +40,12 @@ actions:
   - action_set_nombre
 
 slots:
+
   nombre:
     type: text
     mappings:
-    - type: custom
-      action: action_set_nombre
+    - type: from_entity
+      entity: nombre
 
   pregunta:
     type: text

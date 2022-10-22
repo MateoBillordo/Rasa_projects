@@ -36,23 +36,6 @@ class ActionSetRolTiempo(Action):
 
         return []
 
-class ActionSetNombre(Action):
-
-    def name(self) -> Text:
-        return "action_set_nombre"
-
-    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text,Any]) -> List[Dict[Text,Any]]:
-
-        ultimoMensaje = tracker.latest_message['entities']
-
-        if len(ultimoMensaje) > 0:
-            entidad = next((x for x in ultimoMensaje if x['entity'] == "nombre"),None)
-            if entidad != None:
-                nombre = entidad['value']
-                return[SlotSet("nombre",str(nombre))]
-
-        return []
-
 class OperarArchivo():
 
     @staticmethod
