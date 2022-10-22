@@ -124,7 +124,7 @@ cursadasFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_no_aprobad
 
 finalesFaltantes(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),final_no_aprobado(Cod)),Lista).
 
-finalesFaltantesHastaAhora(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada_final_no_aprobado(Cod)),Lista).
+finalesAdeudados(Lista):-findall(Nom,(materia(Cod,Nom,_,_,_),cursada_aprobada_final_no_aprobado(Cod)),Lista).
 
 areasDeInteres(Lista):-findall(X,interesa(X),Lista).
 
@@ -158,8 +158,7 @@ horario_entre(Hora,Horario):-
     nth0(1,Horario,HoraFin),
     write(HoraInicio),
     write(HoraFin),
-    Hora @>= HoraInicio,
-    Hora @=< HoraFin.
+    (Hora @>= HoraFin -> true; Hora @=< HoraInicio -> true; false).
 
 
 horario_valido(Dia,Hora):-

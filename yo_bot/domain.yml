@@ -12,12 +12,11 @@ intents:
   - cuantos
   - que_o_cuales
   - por_que
-  # - preguntas_carrera
-  # - estudio
-  # - otras_actividades
   - listos
   - propuesta_fecha
   - confirmacion_reu
+  - no_quiero_hablar
+  - razon_mal_humor
 
 entities:
   - facultad
@@ -26,6 +25,7 @@ entities:
   - nombre
   - dia
   - hora
+  - estado_de_animo
 
 actions:
   - action_responder_cuantos
@@ -33,15 +33,15 @@ actions:
   - action_responder_porque
   - action_set_rol_tiempo
   - action_chequea_fecha
-  - action_listo
+  - action_listos
   - action_saludar
   - action_agendar_contacto
-  - action_preguntar_estado_de_animo
+  - action_responder_mal_humor
 
 slots:
+
   nombre:
     type: text
-    initial_value: null
     mappings:
     - type: from_entity
       entity: nombre
@@ -82,6 +82,17 @@ responses:
   utter_soy_un_bot:
   - text: "Soy un bot, pero Mateo me dejo como su reemplazo momentaneamente :)"
 
+  utter_no_agendado:
+  - text: "Hola, quien sos? No te tengo agendado"
+  - text: "Hola, no te tengo agendado, cual es tu nombre?"
+  - text: "Hola, no te tengo en mi agenda de contactos, como te llamas?"
+
+  utter_gusto_en_conocerte:
+  - text: "Genial, me alegro de conocerte {nombre}!"
+  - text: "Me alegro de conocerte {nombre}!"
+  - text: "Hola {nombre}, que gusto conocerte!"
+  - text: "Que gusto conocerte {nombre}!"
+
   utter_despedir:
   - text: "Hasta luego!"
   - text: "Nos vemos!"
@@ -92,6 +103,14 @@ responses:
   - text: "Nos vemos {nombre}!"
   - text: "Chau {nombre}!"
 
+  utter_preguntar_estado_de_animo:
+  - text: "Como estas?"
+  - text: "Como te va?"
+  - text: "Como andas?"
+  - text: "Como va todo?"
+  - text: "Como va?"
+  - text: "Como te trata la vida?"
+
   utter_me_alegra:
   - text: "Me alegra que estes bien!"
   - text: "Me alegro de que andes bien :)"
@@ -100,11 +119,25 @@ responses:
   - text: "Me alegro de que estes teniendo un buen dia :)"
   - text: "Me alegro!"
 
+  utter_que_paso:
+  - text: "Que paso?"
+  - text: "Por que? Paso algo?"
+  - text: "Contame. Que paso?"
+
+  utter_entiendo_no_hablar:
+  - text: "Entiendo, no pasa nada. Espero que tu dia mejore!"
+  - text: "Entiendo, si necesitas hablar podes contar conmigo :)"
+  - text: "Esta bien, entiendo"
+
   utter_animar:
-  - text: "Que mal :(. Espero que tu dia mejore!"
-  - text: "Animo que siempre es buen momento para sonreir :)"
   - text: "Te entiendo, a veces tambien me siento asi. Pero ya va a pasar, te lo prometo :)"
   - text: "Animo, todo va a estar bien :)"
+
+  utter_entiendo_hecho_negativo:
+  - text: "Entiendo, son cosas que pasan :/. Si necesitas hablar podes contar conmigo :)"
+
+  utter_default:
+  - text: "Perdon, no te entendi"
 
 session_config:
   session_expiration_time: 60

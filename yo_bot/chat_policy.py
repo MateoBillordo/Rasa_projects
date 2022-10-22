@@ -1,3 +1,4 @@
+from multiprocessing.dummy import Manager
 from typing import List,Dict,Text, Optional, Any, Union, Tuple
 from rasa.core.policies.policy import Policy
 from rasa.shared.nlu.interpreter import NaturalLanguageInterpreter
@@ -22,6 +23,8 @@ from rasa.core.constants import (
 )
 from rasa.engine.storage.resource import Resource
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
+from rasa.engine.storage.storage import ModelStorage
+from rasa.engine.graph import ExecutionContext
 # from classes import Manager
 
 # temporary constants to support back compatibility
@@ -32,7 +35,7 @@ OLD_DEFAULT_MAX_HISTORY = 5
     DefaultV1Recipe.ComponentType.POLICY_WITHOUT_END_TO_END_SUPPORT, is_trainable=False
 )
 class ChatPolicy(Policy):
-	def __init__(
+	def _init_(
 			self,
         	config: Dict[Text, Any],
         	model_storage: ModelStorage,
@@ -43,10 +46,12 @@ class ChatPolicy(Policy):
 		) -> None:
 
 		config[POLICY_MAX_HISTORY] = None
-		super().__init__(config, model_storage, resource, execution_context, featurizer)
+		super()._init_(config, model_storage, resource, execution_context, featurizer)
 		self.answered = False
 		self.priority = 1
-
+		self.eventos = []
+		for i in range(8):
+			self.eventos.append("")
 	def train(
 			self,
 			training_trackers: List[TrackerWithCachedStates],
@@ -70,42 +75,40 @@ class ChatPolicy(Policy):
 			**kwargs: Any,
 	) -> PolicyPrediction:
 		print("Especulando")
-		result = self._default_predictions(domain)
 		intent = str(tracker.latest_message.intent["name"])
 		print(intent)
+		result = self._default_predictions(domain)
 		if not self.answered:
-			meta =  tracker.latest_message["metadata"]
-			chat = meta["chat"]["type"]
+			chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
 			print(chat)
 			if chat=="private":
 				result = confidence_scores_for(str("action_listen"), 1.0, domain)
 				print(result)
-				self.answered=True
+				self.answered = True
 			else:
-				intent = str(tracker.latest_message.intent["name"])
-				
+				self.eventos.append(intent)
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
+					self.answered = True
 				elif intent == "propuesta_fecha":
-					historial = tracker.events
-					historial = [x for x in historial if x["event"] == "user"] 
-					historial = [x["parse_data"]["intent"]["name"] for x in historial]
-					historial = historial[-8:]
-			
-					if historial[7] == "no_puedo":
+					self.eventos = self.eventos[-8:]
+
+					if self.eventos[7] == "negar":
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-					elif historial.count("propuesta_fecha") >= 2:
+						self.answered = True
+
+					elif self.eventos.count("propuesta_fecha") >= 2:
 						pass
 					else:
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-      
-				elif intent == "confirmacion_reu":
-					result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
-				else: 
-					pass
-	
+						self.answered = True
 
-				self.answered = True
+				# elif intent == "confirmacion_reu":
+				# 	result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
+				else:
+					pass
+
+
 		else:
 			self.answered = False
 		return self._prediction(result)

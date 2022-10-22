@@ -39,7 +39,20 @@ stories:
 - story: mal_humor
   steps:
   - intent: mal_humor
-  - action: utter_animar
+  - action: utter_que_paso
+  - checkpoint: intencion_de_contar
+
+- story: mal_humor con intencion de contar
+  steps:
+  - checkpoint: intencion_de_contar
+  - intent: razon_mal_humor
+  - action: action_responder_mal_humor
+
+- story: mal_humor sin intencion de contar
+  steps:
+  - checkpoint: intencion_de_contar
+  - intent: no_quiero_hablar
+  - action: utter_entiendo_no_hablar
 
 - story: cuantos_algo
   steps:

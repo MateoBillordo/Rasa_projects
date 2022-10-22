@@ -133,6 +133,35 @@ nlu:
     - mal
     - mal, no fue un buen dia
 
+- intent: no_quiero_hablar
+  examples: |
+    - no quiero hablar
+    - no quiero hablar de eso
+    - no quiero hablar de eso ahora
+    - no estoy de animos, no quiero hablar
+    - perdon, no quiero hablar
+    - perdon, pero no quiero hablar
+    - la verdad que no quiero hablar
+    - la verdad que no quiero hablar de eso
+    - la verdad que no quiero hablar de eso ahora
+
+- intent: razon_mal_humor
+  examples: |
+    - tengo hambre y eso me pone de mal humor
+    - dormi poco y estoy cansado
+    - me duele la cabeza
+    - desaprobe un examen
+    - se me rompio la compu
+    - se me rompio la pc
+    - las cosas no estan saliendo como esperaba
+    - no me llevo bien con mi nuevo jefe
+    - no me llevo bien con mis nuevos compañeros
+    - se me rompio la bici
+    - se me rompio la moto
+    - me robaron
+    - me robaron la billetera
+    - me robaron la notebook
+
 - intent: retar_al_bot
   examples: |
     - sos un bot?
@@ -148,6 +177,7 @@ nlu:
     - mi nombre es Joaquin
     - soy Tomas
     - Agustin
+    - decime Juan Ignacio
 
 - lookup: nombre
   examples: |
@@ -195,8 +225,8 @@ nlu:
   examples: |
     - cuales [materias]{"entity":"facultad","value":"cursadas"} estas [cursando]{"entity":"tiempo","value":"presente"}?
     - que [materias]{"entity":"facultad","value":"cursadas"} [cursaste]{"entity":"tiempo","value":"pasado"}?
-    - cuales [finales]{"entity":"facultad","value":"finales"} [rendiste]{"entity":"tiempo","value":"pasado"}?
-    - que [finales]{"entity":"facultad","value":"finales"} [debes]{"entity":"tiempo","value":"presente"}?
+    - cuales [finales](facultad) [rendiste]{"entity":"tiempo","value":"pasado"}?
+    - que [finales](facultad) [debes]{"entity":"tiempo","value":"presente"}?
     - cuales [optativas](facultad) [hiciste]{"entity":"tiempo","value":"pasado"}?
     - que [optativas](facultad) [pensas hacer]{"entity":"tiempo","value":"futuro"}?
     - que [carrera](facultad) estudias?
@@ -283,37 +313,9 @@ nlu:
 
 - regex: hora
   examples: |
-    - (([0-1][0-9])||(2[0-3]))\:[0-5][0-9]
-    - ([0-1][0-9])||(2[0-3])
+    - ([0-1]?[0-9]|2[0-3]):[0-5][0-9]
 
 - intent: confirmacion_reu
   examples: |
     - bueno, entonces si todos pueden dejamos la reunion para el lunes a las [19](hora)
     - entonces quedamos en el martes a las [20:30](hora)
-
-
-
-
-
-
-
-
-# - intent: preguntas_carrera
-#   examples: |
-#     - Te gusta la carrera?
-#     - Por que elegiste la carrera?
-#     - Que es lo que mas te gusta de la carrera?
-#     - Como vas con la carrera?
-#     - En que año estas?
-
-# - intent: estudio
-#   examples: |
-#   - Tenes los apuntes de [programacion exploratoria](materia)?
-#   - Donde estudias?
-#   - Te gusta estudiar solo o en grupo?
-
-# - intent: otras_actividades
-#   examples: |
-#   - Cuales son tus hobbies?
-#   - Que te gusta hacer en tu tiempo libre?
-#   - Trabajas?

@@ -5,18 +5,18 @@
 # https://rasa.com/docs/rasa/custom-actions
 
 
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet
 from random import randint
+from textblob import TextBlob
+from googletrans import Translator
 from swiplserver import PrologMQI
 import os.path
 import json
 
-class ActionSetTiempo(Action):
+class ActionSetRolTiempo(Action):
 
     def name(self) -> Text:
         return "action_set_rol_tiempo"
@@ -31,8 +31,8 @@ class ActionSetTiempo(Action):
                 for key in entidad:
                     if str(key) == "role":
                         return[SlotSet("rol_tiempo",entidad[key])]
-                
-            return[SlotSet("rol_tiempo",None)]
+
+                return[SlotSet("rol_tiempo",None)]
 
         return []
 
@@ -82,7 +82,7 @@ class ConsultarAProlog():
                     if str(tiempo) == "pasado":
                         prolog_thread.query_async("materiasAprobadas(X)",find_all=False)
                     elif str(tiempo) == "presente":
-                        prolog_thread.query_async("finalesFaltantes(X)",find_all=False)
+                            prolog_thread.query_async("finalesAdeudados(X)",find_all=False)
                 
                 elif str(motivo) == "software":
                     if str(rol_tiempo) == "positivo":
@@ -105,7 +105,7 @@ class ActionResponderCuantos(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi"
+        message = "Perdon, no te entendi (cuantos)"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
@@ -136,7 +136,7 @@ class ActionResponderQueOCuales(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi"
+        message = "Perdon, no te entendi (que o cuales)"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
@@ -261,7 +261,7 @@ class ActionChequeaFecha(Action):
 class ActionListo(Action):
     
     def name (self) -> Text:
-        return "action_listo"
+        return "action_listos"
 
     def run( self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
@@ -284,31 +284,6 @@ class ActionListo(Action):
             dispatcher.utter_message(f"Estoy")
         return []
 
-class ActionPreguntarEstadoDeAnimo(Action):
-
-    def name(self):
-        return "action_preguntar_estado_de_animo"
-    
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        ran = randint(0,5)
-        if ran == 0:
-            dispatcher.utter_message("Como estas?")
-        elif ran == 1:
-            dispatcher.utter_message("Como te va?")
-        elif ran == 2:
-            dispatcher.utter_message("Como andas?")
-        elif ran == 3:
-            dispatcher.utter_message("Como va todo?")
-        elif ran == 4:
-            dispatcher.utter_message("Como va?")
-        else:
-            dispatcher.utter_message("Como te trata la vida?")
-
-        return []
-
 class ActionSaludar(Action):
 
     def name(self):
@@ -320,30 +295,25 @@ class ActionSaludar(Action):
         # tiene la forma: {'id': 884975258, 'is_bot': False, 'first_name': 'NOMBRE', 'last_name': 'APELLIDO', 'username': 'USERNAME', 'language_code': 'es'}
         id_usuario = mensaje["metadata"]["message"]["from"]["id"]
 
-        agenda = OperarArchivo().cargarArchivo(".\\data\\agenda.json")
+        agenda = OperarArchivo.cargarArchivo(".\\data\\agenda.json")
 
         if str(id_usuario) in agenda: # si el usuario ya esta en la agenda
             nombre = agenda[str(id_usuario)]["nombre"]
-            nro_random = randint(0, 2)
-            if nro_random == 0:
+
+            ran = randint(0,3)
+            if ran == 0:
                 dispatcher.utter_message(f"Hola {nombre}, que gusto volver a hablar con vos!")
-            elif nro_random == 1:
+            elif ran == 1:
                 dispatcher.utter_message(f"Hola {nombre}, tanto tiempo!")
             else:
                 dispatcher.utter_message(f"Hola {nombre}!")
-            
-            ActionPreguntarEstadoDeAnimo().run(dispatcher, tracker, domain)
 
+            dispatcher.utter_message(response="utter_preguntar_estado_de_animo")
+            
             return [SlotSet("nombre",str(nombre))]
-        
+            
         else: # si el usuario no esta en la agenda
-            nro_random = randint(0, 2)
-            if nro_random == 0:
-                dispatcher.utter_message(f"Hola, quien sos? No te tengo agendado")
-            elif nro_random == 1:
-                dispatcher.utter_message(f"Hola, no te tengo agendado, cual es tu nombre?")
-            else:
-                dispatcher.utter_message("Hola, no te tengo en mi agenda de contactos, como te llamas?")
+            dispatcher.utter_message(response="utter_no_agendado")
         
         return [SlotSet("nombre",None)]
 
@@ -359,7 +329,7 @@ class ActionAgendarContacto(Action):
         apellido_usuario = mensaje["metadata"]["message"]["from"]["last_name"]
         username = mensaje["metadata"]["message"]["from"]["username"]
 
-        agenda = OperarArchivo().cargarArchivo(".\\data\\agenda.json")
+        agenda = OperarArchivo.cargarArchivo(".\\data\\agenda.json")
         
         if str(id_usuario) in agenda: # si el usuario ya esta en la agenda
             nombre_actual = agenda[str(id_usuario)]["nombre"]
@@ -369,19 +339,30 @@ class ActionAgendarContacto(Action):
                 dispatcher.utter_message("Lo se, es un lindo nombre :)")
         
         else: # si el usuario no esta en la agenda
-            nro_random = randint(0, 3)
-            if nro_random == 0:
-                dispatcher.utter_message(f"Genial, me alegro de conocerte {nombre}!")
-            elif nro_random == 1:
-                dispatcher.utter_message(f"Me alegro de conocerte {nombre}!")
-            elif nro_random == 2:
-                dispatcher.utter_message(f"Hola {nombre}, que gusto conocerte!")
-            else:
-                dispatcher.utter_message(f"Que gusto conocerte {nombre}!")
-
-            ActionPreguntarEstadoDeAnimo().run(dispatcher, tracker, domain)
-
+            dispatcher.utter_message(response="utter_gusto_en_conocerte")
+            dispatcher.utter_message(response="utter_preguntar_estado_de_animo")
+            
         agenda[str(id_usuario)] = {"nombre": nombre, "apellido": apellido_usuario, "username": username}
-        OperarArchivo().guardarArchivo(agenda,".\\data\\agenda.json")
+        OperarArchivo.guardarArchivo(agenda,".\\data\\agenda.json")
 
+        return []
+
+class ActionResponderMalHumor(Action):
+
+    def name(self):
+        return "action_responder_mal_humor"
+
+    def run(self, dispatcher, tracker, domain):
+        
+        mensaje = tracker.latest_message["text"]
+
+        traductor = Translator()
+        mensaje_traducido = traductor.translate(mensaje, dest="en").text
+        objetividad = TextBlob(mensaje_traducido).sentiment.subjectivity
+
+        if objetividad > 0.3:
+            dispatcher.utter_message(response="utter_animar")
+        else:
+            dispatcher.utter_message(response="utter_entiendo_hecho_negativo")
+        
         return []
