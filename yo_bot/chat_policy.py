@@ -88,9 +88,6 @@ class ChatPolicy(Policy):
 				self.answered=True
 			else:
 				self.eventos.append(intent)
-				# recibir el intent
-				intent = str(tracker.latest_message.intent["name"])
-				# res = Manager.decision(intent)
 				
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
