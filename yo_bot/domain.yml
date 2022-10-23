@@ -37,6 +37,8 @@ actions:
   - action_saludar
   - action_agendar_contacto
   - action_responder_mal_humor
+  - action_confirmacion_reu
+  - no_contesta
 
 slots:
 
@@ -138,6 +140,9 @@ responses:
 
   utter_default:
   - text: "Perdon, no te entendi"
+
+  utter_1:
+  - text: "1" 
 
 session_config:
   session_expiration_time: 60

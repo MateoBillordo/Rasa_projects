@@ -48,8 +48,11 @@ class ChatPolicy(Policy):
 
 		config[POLICY_MAX_HISTORY] = None
 		super().__init__(config, model_storage, resource, execution_context, featurizer)
+		print ("ANTES:",self.priority)
 		self.answered = False
-		self.priority = 1
+		# I WANT TO UPDATE THE CONFIG PRIORITY 
+		self.config["priority"] = 7
+		print("DESPUES:",self.priority)
 		self.eventos = []
 		for i in range(8):
 			self.eventos.append("")
@@ -75,20 +78,20 @@ class ChatPolicy(Policy):
 			rule_only_data: Optional[Dict[Text, Any]] = None,
 			**kwargs: Any,
 	) -> PolicyPrediction:
+		print("")
 		print("Especulando")
 		result = self._default_predictions(domain)
 		intent = str(tracker.latest_message.intent["name"])
+		chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
 		print(intent)
-		if not self.answered:
-			chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
-			print(chat)
-			if chat=="private":
-				result = confidence_scores_for(str("action_listen"), 1.0, domain)
-				print(result)
-				self.answered=True
-			else:
+		print(chat)
+		result = self._default_predictions(domain)
+		if chat=="private":
+			self.eventos.append(intent)
+			result = confidence_scores_for(str("utter_1"), 0.0, domain)
+		else:
+			if not self.answered:
 				self.eventos.append(intent)
-				
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
 					self.answered = True
@@ -99,19 +102,24 @@ class ChatPolicy(Policy):
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
 						self.answered = True
 					elif self.eventos.count("propuesta_fecha") >= 2:
-						pass
+						result = confidence_scores_for(str("no_contesta"), 1.0, domain)
+						self.answered = True
 					else:
 						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
 						self.answered = True
-      
-				# elif intent == "confirmacion_reu":
-				# 	result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
+				elif intent == "confirmacion_reu":
+					result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
+					self.answered = True
 				else: 
-					pass
+					print("Otro intent")
+					result = confidence_scores_for(str("no_contesta"), 1.0, domain)
+					self.answered=True
 
-		else:
-			self.answered = False
-		return self._prediction(result)
+			else:
+				print("answered = FALSE")
+				self.answered = False
+				print("--------------------------")
+			return self._prediction(result)
 
 	def _metadata(self) -> Dict[Text, Any]:
 		return {
@@ -120,7 +128,7 @@ class ChatPolicy(Policy):
 
 	def get_default_config() -> Dict[Text, Any]:
 		return {
-			"priority": 1,
+			"priority": 7,
 			"core_fallback_threshold": 0.3,
 			"core_fallback_action_name": "action_default_fallback",
 			"enable_fallback_prediction": False,
