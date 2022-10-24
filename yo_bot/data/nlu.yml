@@ -205,16 +205,14 @@ nlu:
     - que [carrera](facultad) estudias?
     - que areas del desarrollo de [software](area_de_interes) [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
     - cuales areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [te interesan]{"entity":"tiempo","role":"positivo","value":"presente"}?
+    - que areas del desarrollo de [software](area_de_interes) [son]{"entity":"tiempo","role":"positivo","value":"presente"} de tu interes?
+    - cuales areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [son]{"entity":"tiempo","role":"positivo","value":"presente"} de tu interes?
     - cuales areas del desarrollo de [software](area_de_interes) [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
     - que areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [no te interesan]{"entity":"tiempo","role":"negativo","value":"presente"}?
+    - cuales areas del desarrollo de [software](area_de_interes) [no son]{"entity":"tiempo","role":"negativo","value":"presente"} de tu interes?
+    - que areas del [desarrollo]{"entity":"area_de_interes","value":"software"} [no son]{"entity":"tiempo","role":"negativo","value":"presente"} de tu interes?
     - cuales?
     - cuales son?
-
-- regex: tiempo
-  examples: |
-    - [a-zA-Z]+
-    - [a-zA-Z]+\s[a-zA-Z]+
-    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
 
 - regex: area_de_interes
   examples: |
