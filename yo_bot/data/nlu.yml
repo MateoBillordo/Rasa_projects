@@ -179,36 +179,9 @@ nlu:
     - [Agustin](nombre)
     - decime Juan [Ignacio](nombre)
 
-- lookup: nombre
+- regex: nombre
   examples: |
-    - Mateo
-    - Mateo Tomas
-    - Maria
-    - Juan Manuel
-    - Franco
-    - Diego
-    - Camila
-    - Damiana
-    - Juan
-    - Martino
-    - Joaquin
-    - Agustin
-    - Luisina
-    - Sol
-    - Ximena
-    - Delfina
-    - Pia
-    - David
-    - Martin
-    - Leonel
-    - Juan Ignacio
-    - Juan Cruz
-    - Juan Francisco
-    - Tomas
-    - Analia
-    - Marcelo
-    - Nelson
-    - Matias
+    - [A-Za-z]+
 
 - intent: cuantos
   examples: |
@@ -237,25 +210,25 @@ nlu:
     - cuales?
     - cuales son?
 
-- lookup: area_de_interes
+- regex: area_de_interes
   examples: |
-    - machine learning
-    - mobile development
-    - ciberseguridad
-    - hacking etico
-    - web development
-    - desarrollo de sistemas embebidos
-    - desarrollo de software de gestion
-    - desarrollo de software orientado a la comunidad cientifica
-    - desarrollo de videojuegos
-    - realidad virtual y aumentada
+    - [A-Za-z]+
+    - [a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]\s[a-zA-Z]+
 
 - intent: por_que
   examples: |
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [machine learning](area_de_interes)?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [mobile development](area_de_interes)?
     - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} la [ciberseguridad](area_de_interes)?
-    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el machine learning?
-    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el desarrollo de videojuegos?
-    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la realidad virtual y aumentada?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [hacking etico](area_de_interes)?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [web development](area_de_interes)?
+    - por que [te interesa]{"entity":"tiempo","role":"positivo","value":"presente"} el [desarrollo de sistemas embebidos](area_de_interes)?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el [desarrollo de software de gestion](area_de_interes)?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el [desarrollo de software orientado a la comunidad cientifica](area_de_interes)?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} el [desarrollo de videojuegos](area_de_interes)?
+    - por que [no te interesa]{"entity":"tiempo","role":"negativo","value":"presente"} la [realidad virtual y aumentada](area_de_interes)?
     - por que?
 
 - intent: listos
@@ -281,16 +254,16 @@ nlu:
     - pueden el [martes](dia) a las [18:00](hora)?
     - el [miercoles](dia) a las [19:30](hora)?
     - que tal el [jueves](dia) a las [20:40](hora)?
-    - no pueden el [lunes](dia) a las [21:00](hora)?
-    - les parece el [lunes](dia) a las [19](hora)?
-    - pueden [lunes](dia) a las [17](hora)?
-    - el [miercoles](dia) a las [12](hora)?
-    - no, no estoy, que tal el [jueves](dia) a las [20:40](hora)?
-    - les parece el [lunes](dia) a las [11](hora)?
-    - les va el [martes](dia) a las [10:30](hora)?
-    - no, que tal el [miercoles](dia) a las [12:30](hora)?
-    - se copan para el [Martes](dia) a las [14:00](hora)
-    - el [Miercoles](dia) quieren a las [20:00](hora)? 
+    - no pueden el [viernes](dia) a las [21:00](hora)?
+    - les parece el [sabado](dia) a las [19](hora)?
+    - pueden [domingo](dia) a las [17](hora)?
+    - el [Lunes](dia) a las [12](hora)?
+    - no, no estoy, que tal el [Martes](dia) a las [20:40](hora)?
+    - les parece el [Miercoles](dia) a las [11](hora)?
+    - les va el [Jueves](dia) a las [10:30](hora)?
+    - no, que tal el [Viernes](dia) a las [12:30](hora)?
+    - se copan para el [Sabado](dia) a las [14:00](hora)
+    - el [Domingo](dia) quieren a las [20:00](hora)? 
     - si pueden, el [Viernes](dia) a las [12:00](hora)
     - el [Sabado](dia) a las [09:00](hora) les copa?
     - les sirve el [miercoles](dia) a las [20:00](hora)?
@@ -300,16 +273,6 @@ nlu:
     - genial, pueden el [lunes](dia) a las [08:00](hora)?
     - genial, quedamos para el [jueves](dia) a las [20:00](hora)
     - excelente, quedamos para el [viernes](dia) a las [12:00](hora)
-
-- lookup: dia
-  examples: |
-    - lunes
-    - martes
-    - miercoles
-    - jueves
-    - viernes
-    - sabado
-    - domingo
 
 - regex: hora
   examples: |

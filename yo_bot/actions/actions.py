@@ -228,17 +228,9 @@ class ActionChequeaFecha(Action):
         hora = tracker.get_slot("hora")
     
         consulta = ConsultarAProlog.consulta(f'horario_valido({dia},"{hora}").')
-        dispatcher.utter_message(text=str(tracker.latest_message)) #borrar
+
         if consulta:
-            ran = randint(0,3)
-            if ran == 0:
-                dispatcher.utter_message(f"Si, en ese horario estoy disponible")
-            elif ran == 1:
-                dispatcher.utter_message(f"Si, ese horario lo tengo libre")
-            elif ran == 2:
-                dispatcher.utter_message(f"Si, estoy libre en ese horario")
-            else:
-                dispatcher.utter_message(f"Si, en ese horario puedo")
+            dispatcher.utter_message(response="utter_horario_disponible")
                 
         else:
             consulta2 = ConsultarAProlog.consulta(f'dia_y_hora_random(X,Y).')
@@ -267,19 +259,8 @@ class ActionListo(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         
-        ran = randint(0,5)
-        if ran == 0:
-            dispatcher.utter_message(f"Dale")
-        elif ran == 1:
-            dispatcher.utter_message(f"Yo estoy")
-        elif ran == 2:
-            dispatcher.utter_message(f"Dale dale")
-        elif ran == 3:
-            dispatcher.utter_message(f"Sisi")
-        elif ran == 4:
-            dispatcher.utter_message(f"Sip")
-        else:
-            dispatcher.utter_message(f"Estoy")
+        dispatcher.utter_message(response="utter_estoy_listo")
+        
         return []
 
 class ActionSaludar(Action):
@@ -369,7 +350,7 @@ class NoContesta(Action):
     def name(self) -> Text:
         return "no_contesta"
     def run(self, dispatcher: CollectingDispatcher,tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        print("ENTRO A NO CONTESTA")
+        
         return[]
 
 class ActionConfirma(Action):  

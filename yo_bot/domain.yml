@@ -138,11 +138,22 @@ responses:
   utter_entiendo_hecho_negativo:
   - text: "Entiendo, son cosas que pasan :/. Si necesitas hablar podes contar conmigo :)"
 
-  utter_default:
+  utter_por_defecto:
   - text: "Perdon, no te entendi"
 
-  utter_1:
-  - text: "1" 
+  utter_horario_disponible:
+  - text: "Si, en ese horario estoy disponible"
+  - text: "Si, ese horario lo tengo libre"
+  - text: "Si, estoy libre en ese horario"
+  - text: "Si, en ese horario puedo"
+
+  utter_estoy_listo:
+  - text: "Dale"
+  - text: "Yo estoy"
+  - text: "Dale dale"
+  - text: "Sisi"
+  - text: "Sip"
+  - text: "Estoy"
 
 session_config:
   session_expiration_time: 60

@@ -50,12 +50,8 @@ class ChatPolicy(Policy):
 		super().__init__(config, model_storage, resource, execution_context, featurizer)
 		print ("ANTES:",self.priority)
 		self.answered = False
-		# I WANT TO UPDATE THE CONFIG PRIORITY 
-		self.config["priority"] = 7
+		self.config["priority"] = 6
 		print("DESPUES:",self.priority)
-		self.eventos = []
-		for i in range(8):
-			self.eventos.append("")
 	def train(
 			self,
 			training_trackers: List[TrackerWithCachedStates],
@@ -87,33 +83,18 @@ class ChatPolicy(Policy):
 		print(chat)
 		result = self._default_predictions(domain)
 		if chat=="private":
-			self.eventos.append(intent)
-			result = confidence_scores_for(str("utter_1"), 0.0, domain)
+			result = confidence_scores_for(str("no_contesta"), 0.0, domain)
 		else:
 			if not self.answered:
-				self.eventos.append(intent)
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
-					self.answered = True
 				elif intent == "propuesta_fecha":
-					self.eventos = self.eventos[-8:]
-
-					if self.eventos[7] == "negar":
-						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-						self.answered = True
-					elif self.eventos.count("propuesta_fecha") >= 2:
-						result = confidence_scores_for(str("no_contesta"), 1.0, domain)
-						self.answered = True
-					else:
-						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-						self.answered = True
+					result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
 				elif intent == "confirmacion_reu":
 					result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
-					self.answered = True
 				else: 
-					print("Otro intent")
 					result = confidence_scores_for(str("no_contesta"), 1.0, domain)
-					self.answered=True
+				self.answered=True
 
 			else:
 				print("answered = FALSE")
