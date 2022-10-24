@@ -7,7 +7,37 @@ rules:
   - intent: saludar
   - action: action_saludar
 
+- rule: presentacion
+  steps:
+  - intent: presentacion
+  - action: action_agendar_contacto
+
 - rule: respuesta por defecto
   steps:
   - intent: nlu_fallback
-  - action: utter_default
+  - action: utter_por_defecto
+
+- rule: retar al bot
+  steps:
+  - intent: retar_al_bot
+  - action: utter_soy_un_bot
+
+- rule: buen_humor
+  steps:
+  - intent: buen_humor
+  - action: utter_me_alegra
+
+- rule: cuantos_algo
+  steps:
+  - intent: cuantos
+  - action: action_responder_cuantos
+
+- rule: que_o_cuales_algo
+  steps:
+  - intent: que_o_cuales
+  - action: action_responder_que_o_cuales
+
+- rule: por_que_algo
+  steps:
+  - intent: por_que
+  - action: action_responder_porque

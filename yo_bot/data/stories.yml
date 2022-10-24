@@ -2,11 +2,6 @@ version: "3.1"
 
 stories:
 
-- story: presentacion
-  steps:
-  - intent: presentacion
-  - action: action_agendar_contacto
-
 - story: despedida
   steps:
   - intent: despedirse
@@ -26,16 +21,6 @@ stories:
     - nombre: null
   - action: utter_despedir
 
-- story: retar al bot
-  steps:
-  - intent: retar_al_bot
-  - action: utter_soy_un_bot
-
-- story: buen_humor
-  steps:
-  - intent: buen_humor
-  - action: utter_me_alegra
-
 - story: mal_humor
   steps:
   - intent: mal_humor
@@ -53,28 +38,3 @@ stories:
   - checkpoint: intencion_de_contar
   - intent: no_quiero_hablar
   - action: utter_entiendo_no_hablar
-
-- story: cuantos_algo
-  steps:
-  - intent: cuantos
-  - action: action_responder_cuantos
-
-- story: que_o_cuales_algo
-  steps:
-  - intent: que_o_cuales
-  - action: action_responder_que_o_cuales
-
-- story: por_que_algo
-  steps:
-  - intent: por_que
-  - action: action_responder_porque
-
-- story: grupal_listos
-  steps:
-  - intent: listos
-  - action: action_listo
-
-- story: grupal_propuesta_fecha
-  steps:
-  - intent: propuesta_fecha
-  - action: action_chequea_fecha

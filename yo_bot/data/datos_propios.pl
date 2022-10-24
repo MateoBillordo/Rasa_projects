@@ -11,11 +11,11 @@ materia(6123,'Algebra Lineal',1,2,[6113]).
 materia(6124,'Fisica General',1,2,[6112]).
 materia(6125,'Matematica Discreta',1,2,[6113]).
 materia(6211,'Ciencias de la Computacion II',2,1,[6121,6122,6125]).
-materia(6212,'Analisis y Diseño de Algoritmos I',2,1,[6121,6122,6125]).
+materia(6212,'Analisis y Disenio de Algoritmos I',2,1,[6121,6122,6125]).
 materia(6213,'Introduccion a la Arquitectura de Sistemas',2,1,[6122]).
 materia(6214,'Analisis Matematico II (Ing. de Sistemas)',2,1,[6112]).
 materia(6215,'Electricidad y Magnetismo',2,1,[6124]).
-materia(6221,'Analisis y Diseño de Algoritmos II',2,2,[6211,6212]).
+materia(6221,'Analisis y Disenio de Algoritmos II',2,2,[6211,6212]).
 materia(6222,'Comunicacion de Datos I',2,2,[6213]).
 materia(6223,'Probabilidades y Estadistica',2,2,[6214,6123,6125]).
 materia(6224,'Electronica Digital',2,2,[6215]).
@@ -32,8 +32,8 @@ materia(6411,'Arquitectura de Computadoras y Tecnicas Digitales',4,1,[6314]).
 materia(6412,'Teoria de la Informacion',4,1,[6212,6222,6223]).
 materia(6413,'Comunicacion de Datos II',4,1,[6222,6324]).
 materia(6414,'Introduccion al Calculo Diferencial e Integral',4,1,[6214]).
-materia(6421,'Diseño de Sistemas de Software',4,2,[6311,6322,6324]).
-materia(6422,'Diseño de Compiladores I',4,2,[6323]).
+materia(6421,'Disenio de Sistemas de Software',4,2,[6311,6322,6324]).
+materia(6422,'Disenio de Compiladores I',4,2,[6323]).
 materia(6511,'Ingenieria de Software',5,1,[6421]).
 
 %Cursadas aprobadas

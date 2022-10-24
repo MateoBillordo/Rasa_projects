@@ -25,6 +25,7 @@ from rasa.engine.storage.resource import Resource
 from rasa.engine.recipes.default_recipe import DefaultV1Recipe
 from rasa.engine.storage.storage import ModelStorage
 from rasa.engine.graph import ExecutionContext
+
 # from classes import Manager
 
 # temporary constants to support back compatibility
@@ -35,7 +36,7 @@ OLD_DEFAULT_MAX_HISTORY = 5
     DefaultV1Recipe.ComponentType.POLICY_WITHOUT_END_TO_END_SUPPORT, is_trainable=False
 )
 class ChatPolicy(Policy):
-	def _init_(
+	def __init__(
 			self,
         	config: Dict[Text, Any],
         	model_storage: ModelStorage,
@@ -46,12 +47,11 @@ class ChatPolicy(Policy):
 		) -> None:
 
 		config[POLICY_MAX_HISTORY] = None
-		super()._init_(config, model_storage, resource, execution_context, featurizer)
+		super().__init__(config, model_storage, resource, execution_context, featurizer)
+		print ("ANTES:",self.priority)
 		self.answered = False
-		self.priority = 1
-		self.eventos = []
-		for i in range(8):
-			self.eventos.append("")
+		self.config["priority"] = 6
+		print("DESPUES:",self.priority)
 	def train(
 			self,
 			training_trackers: List[TrackerWithCachedStates],
@@ -74,44 +74,33 @@ class ChatPolicy(Policy):
 			rule_only_data: Optional[Dict[Text, Any]] = None,
 			**kwargs: Any,
 	) -> PolicyPrediction:
+		print("")
 		print("Especulando")
-		intent = str(tracker.latest_message.intent["name"])
-		print(intent)
 		result = self._default_predictions(domain)
-		if not self.answered:
-			chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
-			print(chat)
-			if chat=="private":
-				result = confidence_scores_for(str("action_listen"), 1.0, domain)
-				print(result)
-				self.answered = True
-			else:
-				self.eventos.append(intent)
+		intent = str(tracker.latest_message.intent["name"])
+		chat =  tracker.latest_message.metadata.get("message")["chat"]["type"]
+		print(intent)
+		print(chat)
+		result = self._default_predictions(domain)
+		if chat=="private":
+			result = confidence_scores_for(str("no_contesta"), 0.0, domain)
+		else:
+			if not self.answered:
 				if intent == "listos":
 					result = confidence_scores_for(str("action_listos"), 1.0, domain)
-					self.answered = True
 				elif intent == "propuesta_fecha":
-					self.eventos = self.eventos[-8:]
+					result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
+				elif intent == "confirmacion_reu":
+					result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
+				else: 
+					result = confidence_scores_for(str("no_contesta"), 1.0, domain)
+				self.answered=True
 
-					if self.eventos[7] == "negar":
-						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-						self.answered = True
-
-					elif self.eventos.count("propuesta_fecha") >= 2:
-						pass
-					else:
-						result = confidence_scores_for(str("action_chequea_fecha"), 1.0, domain)
-						self.answered = True
-
-				# elif intent == "confirmacion_reu":
-				# 	result = confidence_scores_for(str("action_confirmacion_reu"), 1.0, domain)
-				else:
-					pass
-
-
-		else:
-			self.answered = False
-		return self._prediction(result)
+			else:
+				print("answered = FALSE")
+				self.answered = False
+				print("--------------------------")
+			return self._prediction(result)
 
 	def _metadata(self) -> Dict[Text, Any]:
 		return {
@@ -120,7 +109,7 @@ class ChatPolicy(Policy):
 
 	def get_default_config() -> Dict[Text, Any]:
 		return {
-			"priority": 1,
+			"priority": 7,
 			"core_fallback_threshold": 0.3,
 			"core_fallback_action_name": "action_default_fallback",
 			"enable_fallback_prediction": False,
