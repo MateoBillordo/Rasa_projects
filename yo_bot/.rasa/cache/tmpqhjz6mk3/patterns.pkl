@@ -1,0 +1,38 @@
+[
+  {
+    "name": "area_de_interes",
+    "pattern": "[A-Za-z]+"
+  },
+  {
+    "name": "area_de_interes",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "area_de_interes",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "area_de_interes",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]\\s[a-zA-Z]+"
+  },
+  {
+    "name": "hora",
+    "pattern": "([0-1]?[0-9]|2[0-3]):[0-5][0-9]"
+  },
+  {
+    "name": "nombre",
+    "pattern": "[A-Za-z]+"
+  },
+  {
+    "name": "tiempo",
+    "pattern": "[a-zA-Z]+"
+  },
+  {
+    "name": "tiempo",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+"
+  },
+  {
+    "name": "tiempo",
+    "pattern": "[a-zA-Z]+\\s[a-zA-Z]+\\s[a-zA-Z]+"
+  }
+]

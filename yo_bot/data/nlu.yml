@@ -210,6 +210,12 @@ nlu:
     - cuales?
     - cuales son?
 
+- regex: tiempo
+  examples: |
+    - [a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+
+    - [a-zA-Z]+\s[a-zA-Z]+\s[a-zA-Z]+
+
 - regex: area_de_interes
   examples: |
     - [A-Za-z]+

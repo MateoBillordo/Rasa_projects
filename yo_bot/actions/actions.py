@@ -360,5 +360,5 @@ class ActionConfirma(Action):
     def run( self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        dispatcher.utter_message(f"Genial, me parece perfecto")
+        dispatcher.utter_message(f"Joya, me parece bien")
         return []
