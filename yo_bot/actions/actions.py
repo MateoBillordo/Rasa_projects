@@ -105,7 +105,7 @@ class ActionResponderCuantos(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi (cuantos)"
+        message = "Perdon, no te entendi"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
@@ -136,7 +136,7 @@ class ActionResponderQueOCuales(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        message = "Perdon, no te entendi (que o cuales)"
+        message = "Perdon, no te entendi"
         result = []
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
@@ -155,9 +155,10 @@ class ActionResponderQueOCuales(Action):
             tamanio = len(result)
 
             if tamanio == 1:
-                message = result[0]
+                message = result[0].capitalize()
             elif tamanio > 1:
                 message = ""
+                result[0] = result[0].capitalize()
                 for i in range(0,tamanio-1):
                     message += result[i] + ', '
                 message = message.rstrip(', ')
