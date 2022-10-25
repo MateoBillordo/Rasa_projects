@@ -132,8 +132,7 @@ responses:
   - text: "Esta bien, entiendo"
 
   utter_animar:
-  - text: "Te entiendo, a veces tambien me siento asi. Pero ya va a pasar, te lo prometo :)"
-  - text: "Animo, todo va a estar bien :)"
+  - text: "Te entiendo, a veces los dias son dificiles. Pero animo que todo tiene solucion :)"
 
   utter_entiendo_hecho_negativo:
   - text: "Entiendo, son cosas que pasan :/. Si necesitas hablar podes contar conmigo :)"
