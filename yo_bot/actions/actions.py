@@ -107,6 +107,7 @@ class ActionResponderCuantos(Action):
 
         message = "Perdon, no te entendi"
         result = []
+        #Se obtienen los slots para respetar el contexto
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
         rol_tiempo = tracker.get_slot("rol_tiempo")
@@ -138,6 +139,7 @@ class ActionResponderQueOCuales(Action):
 
         message = "Perdon, no te entendi"
         result = []
+        #Se obtienen los slots para respetar el contexto
         motivo = tracker.get_slot("pregunta")
         tiempo = tracker.get_slot("tiempo")
         rol_tiempo = tracker.get_slot("rol_tiempo")
@@ -181,6 +183,7 @@ class ActionPorque(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         message = "Perdon, no te entendi"
+        #Se obtienen los slots para respetar el contexto
         rol_tiempo = tracker.get_slot("rol_tiempo")
         interes = tracker.get_slot("pregunta")
 
@@ -270,9 +273,7 @@ class ActionSaludar(Action):
         return "action_saludar"
 
     def run(self, dispatcher, tracker, domain):
-        # forma de la metadata: {"metadata": {"update_id": 438632107, "message": {"message_id": 107, "from": {"id": 884975258, "is_bot": False, "first_name": "Mateo", "last_name": "Billordo", "username": "Matthew2002", "language_code": "es"}, "chat": {"id": 884975258, "first_name": "Mateo", "last_name": "Billordo", "username": "Matthew2002", "type": "private"}, "date": 1666190279, "text": "hola"}}}
         mensaje = tracker.latest_message
-        # tiene la forma: {'id': 884975258, 'is_bot': False, 'first_name': 'NOMBRE', 'last_name': 'APELLIDO', 'username': 'USERNAME', 'language_code': 'es'}
         id_usuario = mensaje["metadata"]["message"]["from"]["id"]
 
         agenda = OperarArchivo.cargarArchivo(".\\data\\agenda.json")
